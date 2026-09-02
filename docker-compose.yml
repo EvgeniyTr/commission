@@ -1,0 +1,50 @@
+services:
+  db:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: odoo
+      POSTGRES_PASSWORD: odoo
+    volumes:
+      - odoo-db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U odoo"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  odoo:
+    image: odoo:18.0
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8069:8069"
+    environment:
+      HOST: db
+      USER: odoo
+      PASSWORD: odoo
+    volumes:
+      - odoo-web-data:/var/lib/odoo
+      # Only this one addon is mounted - the build doesn't depend on the
+      # rest of the monorepo, so copying just this folder + this file to
+      # another machine is enough to run it.
+      - ./partner_commission:/mnt/extra-addons/partner_commission
+    command:
+      # -d/-i: creates ODOO_DB and installs partner_commission on first
+      # boot if not already done, then just keeps serving - "-i" on an
+      # already-installed module is a no-op, it never touches your data,
+      # so this is safe to run unchanged on every restart.
+      # --db-filter: hides the database picker/manager screen, since
+      # there's only ever one database in this setup.
+      [
+        "-d", "${ODOO_DB:-commission_test}",
+        "-i", "base,partner_commission",
+        "--db-filter=^${ODOO_DB:-commission_test}$$",
+      ]
+
+volumes:
+  odoo-db-data:
+  odoo-web-data:

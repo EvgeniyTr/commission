@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="commission_agreement_view_list" model="ir.ui.view">
+        <field name="name">commission.agreement.list</field>
+        <field name="model">commission.agreement</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name" />
+                <field name="partner_id" />
+                <field name="payer_type" />
+                <field name="transaction_count" />
+                <field name="total_amount" sum="Total amount" />
+                <field name="total_partner_commission" sum="Total commission" />
+                <field name="currency_id" column_invisible="1" />
+            </list>
+        </field>
+    </record>
+
+    <record id="commission_agreement_view_form" model="ir.ui.view">
+        <field name="name">commission.agreement.form</field>
+        <field name="model">commission.agreement</field>
+        <field name="arch" type="xml">
+            <form string="Commission Agreement">
+                <header>
+                    <button
+                        name="action_assign_group_accounts"
+                        string="Assign group's unassigned accounts"
+                        type="object"
+                        invisible="not group_id"
+                        help="Assigns every not-yet-assigned, not-excluded account of the selected group to this agreement."
+                    />
+                </header>
+                <sheet>
+                    <widget
+                        name="web_ribbon"
+                        title="Archived"
+                        bg_color="bg-danger"
+                        invisible="active"
+                    />
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            name="action_view_transactions"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-list"
+                        >
+                            <field
+                                name="transaction_count"
+                                widget="statinfo"
+                                string="Transactions"
+                            />
+                        </button>
+                        <button
+                            name="action_view_accounts"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-address-card"
+                        >
+                            <field
+                                name="account_count"
+                                widget="statinfo"
+                                string="Accounts"
+                            />
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name" />
+                        <h1>
+                            <field name="name" placeholder="e.g. ЖКУ 0.45%" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="partner_id" />
+                            <field name="group_id" />
+                            <field name="payer_type" />
+                            <field name="vat_rate" />
+                            <field name="currency_id" />
+                            <field name="active" invisible="1" />
+                        </group>
+                        <group>
+                            <field name="total_amount" />
+                            <field name="total_nko_fee" />
+                            <field name="total_partner_commission" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Rates by payment method" name="rates">
+                            <field name="rate_line_ids">
+                                <list editable="bottom">
+                                    <field name="pay_method" />
+                                    <field name="nko_rate" />
+                                    <field name="partner_rate" />
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Notes" name="notes">
+                            <field name="notes" />
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="commission_agreement_view_search" model="ir.ui.view">
+        <field name="name">commission.agreement.search</field>
+        <field name="model">commission.agreement</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="partner_id" />
+                <filter
+                    name="payer_client"
+                    string="Commission on top"
+                    domain="[('payer_type', '=', 'client')]"
+                />
+                <filter
+                    name="payer_partner"
+                    string="Commission inside"
+                    domain="[('payer_type', '=', 'partner')]"
+                />
+                <filter
+                    name="inactive"
+                    string="Archived"
+                    domain="[('active', '=', False)]"
+                />
+                <group expand="0" string="Group By">
+                    <filter
+                        name="group_payer_type"
+                        string="Scheme"
+                        context="{'group_by': 'payer_type'}"
+                    />
+                    <filter
+                        name="group_partner"
+                        string="Partner"
+                        context="{'group_by': 'partner_id'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_commission_agreement" model="ir.actions.act_window">
+        <field name="name">Commission Agreements</field>
+        <field name="res_model">commission.agreement</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smart_action">
+                Create a partner commission agreement
+            </p>
+            <p>
+                An agreement defines the partner, the commission scheme
+                (on top / inside) and the rates by payment method.
+            </p>
+        </field>
+    </record>
+</odoo>

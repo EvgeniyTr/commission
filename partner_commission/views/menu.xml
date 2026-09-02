@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <menuitem
+        id="menu_commission_root"
+        name="Partner Commission"
+        sequence="70"
+    />
+    <menuitem
+        id="menu_commission_agreement"
+        name="Agreements"
+        parent="menu_commission_root"
+        action="action_commission_agreement"
+        sequence="10"
+    />
+    <menuitem
+        id="menu_commission_account_group"
+        name="Account Groups"
+        parent="menu_commission_root"
+        action="action_commission_account_group"
+        sequence="15"
+    />
+    <menuitem
+        id="menu_commission_account"
+        name="Accounts (Id Account)"
+        parent="menu_commission_root"
+        action="action_commission_account"
+        sequence="16"
+    />
+    <menuitem
+        id="menu_commission_transaction"
+        name="Transactions"
+        parent="menu_commission_root"
+        action="action_commission_transaction"
+        sequence="20"
+    />
+    <menuitem
+        id="menu_commission_transaction_import"
+        name="Import Registry"
+        parent="menu_commission_root"
+        action="action_commission_transaction_import"
+        sequence="30"
+    />
+    <menuitem
+        id="menu_commission_account_import"
+        name="Import Accounts Directory"
+        parent="menu_commission_root"
+        action="action_commission_account_import"
+        sequence="31"
+    />
+    <menuitem
+        id="menu_commission_transaction_export"
+        name="Export Results"
+        parent="menu_commission_root"
+        action="action_commission_transaction_export"
+        sequence="40"
+    />
+</odoo>

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Account groups -->
+    <record id="commission_account_group_view_list" model="ir.ui.view">
+        <field name="name">commission.account.group.list</field>
+        <field name="model">commission.account.group</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="code" />
+                <field name="name" />
+                <field name="account_count" />
+                <field name="unassigned_count" />
+            </list>
+        </field>
+    </record>
+
+    <record id="commission_account_group_view_form" model="ir.ui.view">
+        <field name="name">commission.account.group.form</field>
+        <field name="model">commission.account.group</field>
+        <field name="arch" type="xml">
+            <form string="Account Group">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            name="action_view_accounts"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-list"
+                        >
+                            <field
+                                name="account_count"
+                                widget="statinfo"
+                                string="Accounts"
+                            />
+                        </button>
+                    </div>
+                    <group>
+                        <field name="code" />
+                        <field name="name" />
+                        <field name="unassigned_count" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_commission_account_group" model="ir.actions.act_window">
+        <field name="name">Account Groups</field>
+        <field name="res_model">commission.account.group</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Accounts (Id Account) -->
+    <record id="commission_account_view_list" model="ir.ui.view">
+        <field name="name">commission.account.list</field>
+        <field name="model">commission.account</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="acc_id" />
+                <field name="name" />
+                <field name="group_id" />
+                <field name="is_head" />
+                <field name="enabled" />
+                <field name="agreement_id" />
+                <field name="payer_type_override" />
+                <field name="effective_payer_type" readonly="1" />
+                <field name="excluded" />
+                <field name="services_exception" optional="hide" />
+            </list>
+        </field>
+    </record>
+
+    <record id="commission_account_view_form" model="ir.ui.view">
+        <field name="name">commission.account.form</field>
+        <field name="model">commission.account</field>
+        <field name="arch" type="xml">
+            <form string="Account">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="acc_id" />
+                            <field name="name" />
+                            <field name="group_id" />
+                            <field name="is_head" />
+                            <field name="enabled" />
+                            <field name="merch_code" />
+                            <field name="inn" />
+                            <field name="ogrn" />
+                        </group>
+                        <group>
+                            <field name="agreement_id" />
+                            <field name="payer_type_override" />
+                            <field name="effective_payer_type" readonly="1" />
+                            <field name="excluded" />
+                            <field name="services_exception" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="commission_account_view_search" model="ir.ui.view">
+        <field name="name">commission.account.search</field>
+        <field name="model">commission.account</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="acc_id" />
+                <field name="name" />
+                <field name="group_id" />
+                <field name="agreement_id" />
+                <filter
+                    name="unassigned"
+                    string="Unassigned"
+                    domain="[('agreement_id', '=', False), ('excluded', '=', False)]"
+                />
+                <filter
+                    name="excluded"
+                    string="Excluded"
+                    domain="[('excluded', '=', True)]"
+                />
+                <filter
+                    name="is_head"
+                    string="Head accounts"
+                    domain="[('is_head', '=', True)]"
+                />
+                <group expand="0" string="Group By">
+                    <filter
+                        name="group_by_group"
+                        string="Account group"
+                        context="{'group_by': 'group_id'}"
+                    />
+                    <filter
+                        name="group_by_agreement"
+                        string="Agreement"
+                        context="{'group_by': 'agreement_id'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_commission_account" model="ir.actions.act_window">
+        <field name="name">Accounts (Id Account)</field>
+        <field name="res_model">commission.account</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smart_action">
+                No accounts yet
+            </p>
+            <p>
+                Use "Import Accounts Directory" to load the gateway's
+                accounts export first.
+            </p>
+        </field>
+    </record>
+</odoo>

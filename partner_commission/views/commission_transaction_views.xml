@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="commission_transaction_view_list" model="ir.ui.view">
+        <field name="name">commission.transaction.list</field>
+        <field name="model">commission.transaction</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="date" />
+                <field name="ref_no" />
+                <field name="agreement_id" />
+                <field name="partner_id" />
+                <field name="pay_method" />
+                <field name="status" />
+                <field name="amount" sum="Amount" />
+                <field name="nko_fee" sum="NKO fee" />
+                <field name="partner_commission" sum="Partner commission" />
+                <field name="client_pays" sum="Client pays" />
+                <field name="partner_receives" sum="Partner receives" />
+                <field name="currency_id" column_invisible="1" />
+            </list>
+        </field>
+    </record>
+
+    <record id="commission_transaction_view_form" model="ir.ui.view">
+        <field name="name">commission.transaction.form</field>
+        <field name="model">commission.transaction</field>
+        <field name="arch" type="xml">
+            <form string="Commission Transaction">
+                <sheet>
+                    <group>
+                        <group string="Transaction">
+                            <field name="agreement_id" />
+                            <field name="account_id" readonly="1" />
+                            <field name="partner_id" readonly="1" />
+                            <field name="payer_type" readonly="1" />
+                            <field name="ref_no" />
+                            <field name="date" />
+                            <field name="confirmation_date" />
+                            <field name="status" />
+                            <field name="pay_method" />
+                            <field name="pay_method_raw" />
+                        </group>
+                        <group string="Calculation">
+                            <field name="amount" />
+                            <field name="nko_rate" />
+                            <field name="nko_fee" />
+                            <field name="nko_vat" />
+                            <field name="nko_fee_wo_vat" />
+                            <field name="partner_rate" />
+                            <field name="partner_commission" />
+                            <field name="client_pays" />
+                            <field name="partner_receives" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Registry data" name="registry">
+                            <group>
+                                <group>
+                                    <field name="currency_name" />
+                                    <field name="gw_commission" />
+                                    <field name="gw_commission_vat" />
+                                    <field name="gw_commission_wo_vat" />
+                                    <field name="cops" />
+                                    <field name="cops_vat" />
+                                    <field name="cops_wo_vat" />
+                                    <field name="gross_profit_raw" />
+                                </group>
+                                <group>
+                                    <field name="bank_ref" />
+                                    <field name="auth_code" />
+                                    <field name="company_name" />
+                                    <field name="id_account" />
+                                    <field name="erp_id" />
+                                    <field name="terminal" />
+                                    <field name="pay_method_bank" />
+                                </group>
+                                <group>
+                                    <field name="identity_card" />
+                                    <field name="rc" />
+                                    <field name="card_info" />
+                                    <field name="order_pinfo" />
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="commission_transaction_view_search" model="ir.ui.view">
+        <field name="name">commission.transaction.search</field>
+        <field name="model">commission.transaction</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="ref_no" />
+                <field name="agreement_id" />
+                <field name="partner_id" />
+                <field name="status" />
+                <filter
+                    name="complete"
+                    string="Complete"
+                    domain="[('status', '=', 'COMPLETE')]"
+                />
+                <group expand="0" string="Group By">
+                    <filter
+                        name="group_agreement"
+                        string="Agreement"
+                        context="{'group_by': 'agreement_id'}"
+                    />
+                    <filter
+                        name="group_pay_method"
+                        string="Payment method"
+                        context="{'group_by': 'pay_method'}"
+                    />
+                    <filter
+                        name="group_status"
+                        string="Status"
+                        context="{'group_by': 'status'}"
+                    />
+                    <filter
+                        name="group_date"
+                        string="Date"
+                        context="{'group_by': 'date:month'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_commission_transaction" model="ir.actions.act_window">
+        <field name="name">Transactions</field>
+        <field name="res_model">commission.transaction</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_complete': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smart_action">
+                No transactions yet
+            </p>
+            <p>
+                Import a registry file from an agreement to see transactions
+                and their calculated commission here.
+            </p>
+        </field>
+    </record>
+</odoo>

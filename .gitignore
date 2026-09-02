@@ -84,5 +84,8 @@ docs/_build/
 *~
 *.swp
 
+# DB backups (contain real business data - never commit them)
+/backup/
+
 # OCA rules
 !static/lib/
