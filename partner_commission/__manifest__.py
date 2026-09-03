@@ -18,6 +18,7 @@
         "wizards/commission_transaction_import_views.xml",
         "wizards/commission_transaction_export_views.xml",
         "views/menu.xml",
+        "data/recompute_action.xml",
     ],
     "installable": True,
     "application": True,

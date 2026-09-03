@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record id="server_action_recompute_all_commission_transactions" model="ir.actions.server">
+    <field name="name">Recompute all commission transactions</field>
+    <field name="model_id" ref="model_commission_transaction"/>
+    <field name="state">code</field>
+    <field name="code">env['commission.transaction'].action_recompute_all()</field>
+  </record>
+
+  <record id="menu_recompute_commission_transactions" model="ir.ui.menu">
+    <field name="name">Recompute transactions</field>
+    <field name="parent_id" ref="menu_commission_root"/>
+    <field name="action" ref="server_action_recompute_all_commission_transactions"/>
+  </record>
+</odoo>

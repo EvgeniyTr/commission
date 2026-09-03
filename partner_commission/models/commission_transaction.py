@@ -217,3 +217,37 @@ class CommissionTransaction(models.Model):
                 # the commission is deducted from the partner's share.
                 rec.client_pays = rec.amount
                 rec.partner_receives = rec.amount - rec.partner_commission
+
+    def action_recompute(self):
+        """Recompute amounts for the current recordset (safe batched commits).
+
+        Can be called from a button on the form/list to recompute selected
+        transactions without holding a huge transaction open.
+        """
+        limit = 200
+        ids = list(self.ids)
+        for i in range(0, len(ids), limit):
+            chunk = self.browse(ids[i : i + limit])
+            chunk._compute_amounts()
+            # commit between chunks to avoid long-running transactions
+            self.env.cr.commit()
+        return True
+
+    @api.model
+    def action_recompute_all(self):
+        """Recompute all commission.transaction records in the database.
+
+        Use with caution; this runs in batches and commits between them.
+        Intended to be invoked from a server action/menu item.
+        """
+        Tx = self.env["commission.transaction"]
+        limit = 200
+        offset = 0
+        while True:
+            chunk = Tx.search([], offset=offset, limit=limit)
+            if not chunk:
+                break
+            chunk._compute_amounts()
+            self.env.cr.commit()
+            offset += limit
+        return True
