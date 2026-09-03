@@ -184,6 +184,8 @@ class CommissionTransaction(models.Model):
 
             rec.nko_fee = _round2(rec.amount * rec.nko_rate / 100.0)
             vat_rate = rec.agreement_id.vat_rate or 0.0
+            if rec.pay_method == "sbp":
+                vat_rate = 0.0
             nko_vat_raw = (
                 rec.nko_fee * vat_rate / (100.0 + vat_rate) if vat_rate else 0.0
             )
