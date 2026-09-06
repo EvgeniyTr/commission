@@ -162,7 +162,14 @@ class CommissionTransaction(models.Model):
         return super().create(vals_list)
 
     def _get_rate_line(self):
+        """The rate to apply: the account's own override for this payment
+        method if one exists, otherwise the agreement's rate line for it."""
         self.ensure_one()
+        override = self.account_id.rate_override_ids.filtered(
+            lambda line: line.pay_method == self.pay_method
+        )[:1]
+        if override:
+            return override
         return self.agreement_id.rate_line_ids.filtered(
             lambda line: line.pay_method == self.pay_method
         )[:1]
@@ -171,6 +178,8 @@ class CommissionTransaction(models.Model):
         "amount",
         "pay_method",
         "account_id.payer_type_override",
+        "account_id.rate_override_ids.nko_rate",
+        "account_id.rate_override_ids.partner_rate",
         "agreement_id.payer_type",
         "agreement_id.vat_rate",
         "agreement_id.rate_line_ids.nko_rate",

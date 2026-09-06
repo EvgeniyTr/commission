@@ -95,6 +95,22 @@
                             <field name="services_exception" />
                         </group>
                     </group>
+                    <notebook>
+                        <page string="Rate overrides" name="rate_overrides">
+                            <p class="text-muted">
+                                Optional: override the agreement's rate for
+                                this account, by payment method. Leave empty
+                                to use the agreement's own rates.
+                            </p>
+                            <field name="rate_override_ids">
+                                <list editable="bottom">
+                                    <field name="pay_method" />
+                                    <field name="nko_rate" />
+                                    <field name="partner_rate" />
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
                 </sheet>
             </form>
         </field>

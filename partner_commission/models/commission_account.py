@@ -68,6 +68,14 @@ class CommissionAccount(models.Model):
         "- not used in the commission calculation - but carried through "
         "to the transaction export as-is.",
     )
+    rate_override_ids = fields.One2many(
+        comodel_name="commission.account.rate",
+        inverse_name="account_id",
+        string="Rate overrides",
+        help="Optional per-account rate, by payment method. If there is "
+        "no override row for a payment method, the agreement's own rate "
+        "for it applies.",
+    )
 
     _sql_constraints = [
         ("acc_id_uniq", "unique(acc_id)", "This Id Account already exists."),
