@@ -27,7 +27,16 @@ LEGACY_HEADER = [
     "Точка исключение (для пл ФЛ)",
     "Есть Услуги - исключения",
 ]
-REGISTRY_HEADER = ["RefNo", "Amount", "Commission", "Commission VAT", "Commission without VAT", "Id Account", "BankRef (RRN)", "Date"]
+REGISTRY_HEADER = [
+    "RefNo",
+    "Amount",
+    "Commission",
+    "Commission VAT",
+    "Commission without VAT",
+    "Id Account",
+    "BankRef (RRN)",
+    "Date",
+]
 
 # The legacy registry's short PayMethod code, keyed by our normalized value.
 PAY_METHOD_CODE = {"card": "CCVISAMC", "sbp": "FASTER_PAYMENTS"}
@@ -97,12 +106,15 @@ class CommissionTransactionExport(models.TransientModel):
         return domain
 
     def _get_registry_row(self, txn):
-        """Return the optional raw-registry part of an export row."""
+        """Return optional raw-registry values from the calculated transaction."""
         return [
             txn.ref_no or "",
             _num(txn.amount),
             _num(txn.gw_commission),
+            _num(txn.gw_commission_vat),
+            _num(txn.gw_commission_wo_vat),
             txn.id_account or (txn.account_id.acc_id or ""),
+            txn.bank_ref or "",
             _date(txn.date),
         ]
 
