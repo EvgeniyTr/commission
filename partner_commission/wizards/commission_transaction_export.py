@@ -22,12 +22,12 @@ LEGACY_HEADER = [
     "Вознаграждение без НДС",
     "Ставка вознаграждения НКО",
     "Бонус ДМЛ",
-    "Пла��ельщик комиссии",
+    "Плательщик комиссии",
     "Наименование контрагента",
     "Точка исключение (для пл ФЛ)",
     "Есть Услуги - исключения",
 ]
-REGISTRY_HEADER = ["RefNo", "Amount", "Commission", "Account", "Date"]
+REGISTRY_HEADER = ["RefNo", "Amount", "Commission", "Commission VAT", "Commission without VAT", "Id Account", "BankRef (RRN)", "Date"]
 
 # The legacy registry's short PayMethod code, keyed by our normalized value.
 PAY_METHOD_CODE = {"card": "CCVISAMC", "sbp": "FASTER_PAYMENTS"}
