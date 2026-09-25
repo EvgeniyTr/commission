@@ -9,10 +9,13 @@
                     <field name="date_from" />
                     <field name="date_to" />
                     <field name="agreement_ids" widget="many2many_tags" />
+                    <field name="include_registry_fields" />
                     <p class="text-muted">
                         Leave filters empty to export every agreement / all
-                        dates. Same columns, ';' delimiter and ','
-                        decimal separator as the legacy "Итог.csv".
+                        dates. The CSV uses ';' as the field delimiter and '.'
+                        as the decimal separator. Enable "Include registry
+                        fields" to append RefNo, Amount, commission, account
+                        and date fields.
                     </p>
                 </group>
                 <group invisible="state != 'done'">
