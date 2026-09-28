@@ -1,4 +1,6 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+from datetime import timedelta
+
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
@@ -90,15 +92,35 @@ class CommissionAgreement(models.Model):
     total_amount = fields.Monetary(compute="_compute_transaction_stats")
     total_nko_fee = fields.Monetary(compute="_compute_transaction_stats")
     total_partner_commission = fields.Monetary(compute="_compute_transaction_stats")
+    total_amount_last_month = fields.Monetary(
+        compute="_compute_transaction_stats",
+        string="Total Amount (last month)",
+        help="Sum over the previous full calendar month (e.g. all of "
+        "August, if today is in September).",
+    )
+    total_nko_fee_last_month = fields.Monetary(
+        compute="_compute_transaction_stats", string="Total NKO Fee (last month)"
+    )
+    total_partner_commission_last_month = fields.Monetary(
+        compute="_compute_transaction_stats",
+        string="Total Partner Commission (last month)",
+    )
 
     @api.depends("account_ids")
     def _compute_account_count(self):
         for agreement in self:
             agreement.account_count = len(agreement.account_ids)
 
-    @api.depends("transaction_ids.amount", "transaction_ids.nko_fee",
-                 "transaction_ids.partner_commission")
+    @api.depends(
+        "transaction_ids.amount",
+        "transaction_ids.nko_fee",
+        "transaction_ids.partner_commission",
+        "transaction_ids.date",
+    )
     def _compute_transaction_stats(self):
+        today = fields.Date.context_today(self)
+        last_month_end = today.replace(day=1) - timedelta(days=1)
+        last_month_start = last_month_end.replace(day=1)
         for agreement in self:
             transactions = agreement.transaction_ids
             agreement.transaction_count = len(transactions)
@@ -106,6 +128,20 @@ class CommissionAgreement(models.Model):
             agreement.total_nko_fee = sum(transactions.mapped("nko_fee"))
             agreement.total_partner_commission = sum(
                 transactions.mapped("partner_commission")
+            )
+
+            last_month_txns = transactions.filtered(
+                lambda t: t.date
+                and last_month_start <= t.date.date() <= last_month_end
+            )
+            agreement.total_amount_last_month = sum(
+                last_month_txns.mapped("amount")
+            )
+            agreement.total_nko_fee_last_month = sum(
+                last_month_txns.mapped("nko_fee")
+            )
+            agreement.total_partner_commission_last_month = sum(
+                last_month_txns.mapped("partner_commission")
             )
 
     def action_view_transactions(self):

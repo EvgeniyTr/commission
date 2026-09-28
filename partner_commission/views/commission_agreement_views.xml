@@ -83,6 +83,11 @@
                             <field name="total_nko_fee" />
                             <field name="total_partner_commission" />
                         </group>
+                        <group string="Last calendar month">
+                            <field name="total_amount_last_month" />
+                            <field name="total_nko_fee_last_month" />
+                            <field name="total_partner_commission_last_month" />
+                        </group>
                     </group>
                     <notebook>
                         <page string="Rates by payment method" name="rates">

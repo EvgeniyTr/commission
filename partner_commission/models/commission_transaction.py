@@ -14,6 +14,17 @@ def _round2(value):
     return float(Decimal(str(value)).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP))
 
 
+def _pct_of(base, rate_percent):
+    """base * rate_percent / 100, computed in exact decimal arithmetic
+    instead of binary float. A rate/amount pair that lands exactly on a
+    rounding boundary (e.g. 350 * 0.35% = 1.225 exactly) can otherwise
+    come out misrepresented in IEEE754 double - 350.0 * 0.35 / 100.0 is
+    1.2249999999999999, not 1.225 - which then rounds the wrong way even
+    with a correct half-up _round2(). Excel avoids this with its own
+    15-significant-digit internal precision; this is our equivalent."""
+    return Decimal(str(base)) * Decimal(str(rate_percent)) / Decimal("100")
+
+
 class CommissionTransaction(models.Model):
     """One line of the transaction registry imported from the payment
     gateway, enriched with the partner commission calculation for its
@@ -191,23 +202,32 @@ class CommissionTransaction(models.Model):
             rec.nko_rate = rate_line.nko_rate if rate_line else 0.0
             rec.partner_rate = rate_line.partner_rate if rate_line else 0.0
 
-            rec.nko_fee = _round2(rec.amount * rec.nko_rate / 100.0)
+            rec.nko_fee = _round2(_pct_of(rec.amount, rec.nko_rate))
             vat_rate = rec.agreement_id.vat_rate or 0.0
             if rec.pay_method == "sbp":
                 vat_rate = 0.0
+            # Kept as plain float (not exact-decimal) on purpose: this is
+            # what "NKO fee without VAT" is subtracted from below, at full
+            # precision, matching the legacy export's own un-rounded float
+            # arithmetic for that column to within 1e-14.
             nko_vat_raw = (
                 rec.nko_fee * vat_rate / (100.0 + vat_rate) if vat_rate else 0.0
             )
-            # NKO fee VAT is rounded for display (matches the legacy
-            # export), but "NKO fee without VAT" is kept at full precision,
-            # computed from the *unrounded* VAT - also matching the legacy
-            # export, where that column is never rounded.
-            rec.nko_vat = _round2(nko_vat_raw)
+            # The *displayed*, rounded NKO fee VAT goes through exact
+            # decimal arithmetic instead, same reasoning as _pct_of above -
+            # otherwise a VAT amount that lands exactly on a rounding
+            # boundary could round the wrong way.
+            nko_vat_exact = (
+                Decimal(str(rec.nko_fee))
+                * Decimal(str(vat_rate))
+                / (Decimal("100") + Decimal(str(vat_rate)))
+                if vat_rate
+                else Decimal("0")
+            )
+            rec.nko_vat = _round2(nko_vat_exact)
             rec.nko_fee_wo_vat = rec.nko_fee - nko_vat_raw
 
-            rec.partner_commission = _round2(
-                rec.amount * rec.partner_rate / 100.0
-            )
+            rec.partner_commission = _round2(_pct_of(rec.amount, rec.partner_rate))
 
             # A specific account can override the agreement's default
             # scheme, for groups that mix both (e.g. most accounts pay
