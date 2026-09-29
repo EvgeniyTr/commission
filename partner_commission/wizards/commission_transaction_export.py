@@ -39,7 +39,19 @@ REGISTRY_HEADER = [
 ]
 
 # The legacy registry's short PayMethod code, keyed by our normalized value.
-PAY_METHOD_CODE = {"card": "CCVISAMC", "sbp": "FASTER_PAYMENTS"}
+# card/sbp keep their historical codes (matching the old manual export);
+# the newer payment methods have no such precedent, so their own label is
+# used as-is.
+PAY_METHOD_CODE = {
+    "card": "CCVISAMC",
+    "sbp": "FASTER_PAYMENTS",
+    "alfapay": "AlfaPay",
+    "intcard": "INTCARD",
+    "payout": "Payout",
+    "payout_sbp": "Payout Faster Payment",
+    "sberpay": "SberPay",
+    "tpay": "T-Pay",
+}
 PAYER_TYPE_RU = {"client": "ФЛ", "partner": "УК"}
 
 

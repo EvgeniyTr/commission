@@ -2,6 +2,21 @@
 from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
+# Every payment method a rate can be defined for. Shared by
+# commission.agreement.rate, commission.account.rate and the
+# commission.transaction.pay_method classification (which adds its own
+# "other" fallback on top - see commission_transaction.py).
+PAY_METHOD_SELECTION = [
+    ("card", "Card"),
+    ("sbp", "SBP (Faster Payments)"),
+    ("alfapay", "AlfaPay"),
+    ("intcard", "INTCARD (international card)"),
+    ("payout", "Payout"),
+    ("payout_sbp", "Payout Faster Payment"),
+    ("sberpay", "SberPay"),
+    ("tpay", "T-Pay"),
+]
+
 
 class CommissionAgreementRate(models.Model):
     """Rate of NKO processing fee and partner commission for one payment
@@ -19,7 +34,7 @@ class CommissionAgreementRate(models.Model):
         ondelete="cascade",
     )
     pay_method = fields.Selection(
-        selection=[("card", "Card"), ("sbp", "SBP (Faster Payments)")],
+        selection=PAY_METHOD_SELECTION,
         string="Payment method",
         required=True,
     )

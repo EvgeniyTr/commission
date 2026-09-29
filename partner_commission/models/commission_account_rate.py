@@ -2,6 +2,8 @@
 from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
+from .commission_agreement_rate import PAY_METHOD_SELECTION
+
 
 class CommissionAccountRate(models.Model):
     """Per-account override of the NKO fee / partner commission rate for
@@ -23,7 +25,7 @@ class CommissionAccountRate(models.Model):
         ondelete="cascade",
     )
     pay_method = fields.Selection(
-        selection=[("card", "Card"), ("sbp", "SBP (Faster Payments)")],
+        selection=PAY_METHOD_SELECTION,
         string="Payment method",
         required=True,
     )

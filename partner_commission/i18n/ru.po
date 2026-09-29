@@ -1400,3 +1400,45 @@ msgstr ""
 "НДС в составе комиссии партнёра, по той же ставке НДС с соглашения, что и "
 "для вознаграждения НКО — не то же самое, что поле 'Commission VAT' из сырого"
 " реестра."
+
+#. module: partner_commission
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_account_rate__pay_method__alfapay
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_agreement_rate__pay_method__alfapay
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_transaction__pay_method__alfapay
+msgid "AlfaPay"
+msgstr "AlfaPay"
+
+#. module: partner_commission
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_account_rate__pay_method__intcard
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_agreement_rate__pay_method__intcard
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_transaction__pay_method__intcard
+msgid "INTCARD (international card)"
+msgstr "INTCARD (международная карта)"
+
+#. module: partner_commission
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_account_rate__pay_method__payout
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_agreement_rate__pay_method__payout
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_transaction__pay_method__payout
+msgid "Payout"
+msgstr "Payout"
+
+#. module: partner_commission
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_account_rate__pay_method__payout_sbp
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_agreement_rate__pay_method__payout_sbp
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_transaction__pay_method__payout_sbp
+msgid "Payout Faster Payment"
+msgstr "Payout (СБП)"
+
+#. module: partner_commission
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_account_rate__pay_method__sberpay
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_agreement_rate__pay_method__sberpay
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_transaction__pay_method__sberpay
+msgid "SberPay"
+msgstr "SberPay"
+
+#. module: partner_commission
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_account_rate__pay_method__tpay
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_agreement_rate__pay_method__tpay
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_transaction__pay_method__tpay
+msgid "T-Pay"
+msgstr "T-Pay"

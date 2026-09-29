@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0-20260817\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-29 15:56+0000\n"
-"PO-Revision-Date: 2026-09-29 15:56+0000\n"
+"POT-Creation-Date: 2026-09-29 16:04+0000\n"
+"PO-Revision-Date: 2026-09-29 16:04+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -103,6 +103,13 @@ msgstr ""
 #: model:ir.model.fields,field_description:partner_commission.field_commission_transaction_export__agreement_ids
 #: model:ir.ui.menu,name:partner_commission.menu_commission_agreement
 msgid "Agreements"
+msgstr ""
+
+#. module: partner_commission
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_account_rate__pay_method__alfapay
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_agreement_rate__pay_method__alfapay
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_transaction__pay_method__alfapay
+msgid "AlfaPay"
 msgstr ""
 
 #. module: partner_commission
@@ -557,6 +564,13 @@ msgid "INN"
 msgstr ""
 
 #. module: partner_commission
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_account_rate__pay_method__intcard
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_agreement_rate__pay_method__intcard
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_transaction__pay_method__intcard
+msgid "INTCARD (international card)"
+msgstr ""
+
+#. module: partner_commission
 #: model:ir.model.fields,field_description:partner_commission.field_commission_account__acc_id
 #: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__id_account
 msgid "Id Account"
@@ -920,6 +934,20 @@ msgid "Payment method"
 msgstr ""
 
 #. module: partner_commission
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_account_rate__pay_method__payout
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_agreement_rate__pay_method__payout
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_transaction__pay_method__payout
+msgid "Payout"
+msgstr ""
+
+#. module: partner_commission
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_account_rate__pay_method__payout_sbp
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_agreement_rate__pay_method__payout_sbp
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_transaction__pay_method__payout_sbp
+msgid "Payout Faster Payment"
+msgstr ""
+
+#. module: partner_commission
 #. odoo-python
 #: code:addons/partner_commission/wizards/commission_account_import.py:0
 #: code:addons/partner_commission/wizards/commission_transaction_import.py:0
@@ -1007,6 +1035,13 @@ msgid "SBP (Faster Payments)"
 msgstr ""
 
 #. module: partner_commission
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_account_rate__pay_method__sberpay
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_agreement_rate__pay_method__sberpay
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_transaction__pay_method__sberpay
+msgid "SberPay"
+msgstr ""
+
+#. module: partner_commission
 #: model_terms:ir.ui.view,arch_db:partner_commission.commission_agreement_view_search
 msgid "Scheme"
 msgstr ""
@@ -1050,6 +1085,13 @@ msgstr ""
 msgid ""
 "Sum over the previous full calendar month (e.g. all of August, if today is "
 "in September)."
+msgstr ""
+
+#. module: partner_commission
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_account_rate__pay_method__tpay
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_agreement_rate__pay_method__tpay
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_transaction__pay_method__tpay
+msgid "T-Pay"
 msgstr ""
 
 #. module: partner_commission

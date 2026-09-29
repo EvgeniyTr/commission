@@ -4,6 +4,7 @@ from decimal import ROUND_HALF_UP, Decimal
 from odoo import api, fields, models
 
 from .commission_agreement import PAYER_TYPE_SELECTION
+from .commission_agreement_rate import PAY_METHOD_SELECTION
 
 
 def _round2(value):
@@ -110,11 +111,7 @@ class CommissionTransaction(models.Model):
     # Payment method classification (drives which rate line applies)
     # ------------------------------------------------------------------
     pay_method = fields.Selection(
-        selection=[
-            ("card", "Card"),
-            ("sbp", "SBP (Faster Payments)"),
-            ("other", "Other / not recognized"),
-        ],
+        selection=PAY_METHOD_SELECTION + [("other", "Other / not recognized")],
         string="Payment method",
         help="Derived from the raw 'Pay Method' field on import. Can be "
         "corrected manually if the automatic match is wrong.",
@@ -178,11 +175,37 @@ class CommissionTransaction(models.Model):
 
     @api.model
     def _pay_method_from_raw(self, raw):
-        """Classify the raw 'Pay Method' registry value into card/sbp/other."""
-        raw = (raw or "").lower()
-        if "fasterpayments" in raw.replace(" ", "").replace("_", ""):
+        """Classify the raw 'Pay Method' registry value into one of
+        PAY_METHOD_SELECTION, or 'other' if none match. Matches by
+        substring on a lowercased, whitespace/underscore/hyphen-stripped
+        version of the raw value, so it doesn't matter whether the
+        gateway sends e.g. 'Marketplace|FasterPayments', 'FASTER_PAYMENTS'
+        or 'Faster Payments' - and new prefixes/suffixes don't break it.
+        Checked most-specific first: 'Payout Faster Payment' must not be
+        classified as plain 'payout' or plain 'sbp'.
+        """
+        text = (
+            (raw or "")
+            .lower()
+            .replace(" ", "")
+            .replace("_", "")
+            .replace("-", "")
+        )
+        if "payoutfasterpayment" in text:
+            return "payout_sbp"
+        if "payout" in text:
+            return "payout"
+        if "fasterpayments" in text:
             return "sbp"
-        if "visa" in raw or "mastercard" in raw or "eurocard" in raw:
+        if "alfapay" in text:
+            return "alfapay"
+        if "sberpay" in text:
+            return "sberpay"
+        if "tpay" in text:
+            return "tpay"
+        if "intcard" in text:
+            return "intcard"
+        if "visa" in text or "mastercard" in text or "eurocard" in text:
             return "card"
         return "other"
 
