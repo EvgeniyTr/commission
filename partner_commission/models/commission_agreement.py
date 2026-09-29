@@ -53,11 +53,14 @@ class CommissionAgreement(models.Model):
     )
     currency_id = fields.Many2one(
         comodel_name="res.currency",
+        string="Currency",
         default=lambda self: self.env.company.currency_id,
         required=True,
     )
     company_id = fields.Many2one(
-        comodel_name="res.company", default=lambda self: self.env.company
+        comodel_name="res.company",
+        string="Company",
+        default=lambda self: self.env.company,
     )
     active = fields.Boolean(default=True)
     notes = fields.Text()

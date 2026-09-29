@@ -18,11 +18,13 @@ class CommissionAccountRate(models.Model):
 
     account_id = fields.Many2one(
         comodel_name="commission.account",
+        string="Account",
         required=True,
         ondelete="cascade",
     )
     pay_method = fields.Selection(
         selection=[("card", "Card"), ("sbp", "SBP (Faster Payments)")],
+        string="Payment method",
         required=True,
     )
     nko_rate = fields.Float(

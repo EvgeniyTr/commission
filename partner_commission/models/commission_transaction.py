@@ -44,6 +44,7 @@ class CommissionTransaction(models.Model):
     # ------------------------------------------------------------------
     agreement_id = fields.Many2one(
         comodel_name="commission.agreement",
+        string="Agreement",
         required=True,
         ondelete="restrict",
         index=True,
@@ -67,9 +68,14 @@ class CommissionTransaction(models.Model):
         "agreement's default scheme.",
     )
     currency_id = fields.Many2one(
-        related="agreement_id.currency_id", store=True, readonly=True
+        related="agreement_id.currency_id",
+        string="Currency",
+        store=True,
+        readonly=True,
     )
-    company_id = fields.Many2one(related="agreement_id.company_id", store=True)
+    company_id = fields.Many2one(
+        related="agreement_id.company_id", string="Company", store=True
+    )
 
     # ------------------------------------------------------------------
     # Raw registry fields (as uploaded)

@@ -1,0 +1,1362 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* partner_commission
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0-20260817\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-29 07:25+0000\n"
+"PO-Revision-Date: 2026-09-29 07:25+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#. module: partner_commission
+#. odoo-python
+#: code:addons/partner_commission/wizards/commission_transaction_import.py:0
+msgid " and %s more"
+msgstr " и ещё %s"
+
+#. module: partner_commission
+#. odoo-python
+#: code:addons/partner_commission/wizards/commission_transaction_import.py:0
+msgid ""
+"%(n)s row(s) skipped: their 'Id Account' is either missing from the accounts"
+" directory, or present but not assigned to any agreement yet. Import/update "
+"the directory and assign these accounts, or set a 'Fallback agreement' on "
+"this wizard and re-import. Affected Id Account(s): %(sample)s%(more)s"
+msgstr ""
+"Пропущено строк: %(n)s — их 'Id Account' либо отсутствует в справочнике "
+"аккаунтов, либо есть, но ещё не назначен ни на одно соглашение. "
+"Импортируйте/обновите справочник и назначьте эти аккаунты, либо укажите "
+"«Резервное соглашение» в этом визарде и повторите импорт. Затронутые Id "
+"Account: %(sample)s%(more)s"
+
+#. module: partner_commission
+#: model:ir.model.fields,help:partner_commission.field_commission_account__enabled
+msgid "'Enabled' flag from the directory."
+msgstr "Флаг «Enabled» из справочника."
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_account_group__account_ids
+#: model:ir.model.fields,field_description:partner_commission.field_commission_account_rate__account_id
+#: model_terms:ir.ui.view,arch_db:partner_commission.commission_account_view_form
+msgid "Account"
+msgstr "Аккаунт"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_account_group__account_count
+#: model:ir.model.fields,field_description:partner_commission.field_commission_agreement__account_count
+msgid "Account Count"
+msgstr "Количество аккаунтов"
+
+#. module: partner_commission
+#: model_terms:ir.ui.view,arch_db:partner_commission.commission_account_group_view_form
+msgid "Account Group"
+msgstr "Группа аккаунтов"
+
+#. module: partner_commission
+#: model:ir.actions.act_window,name:partner_commission.action_commission_account_group
+#: model:ir.ui.menu,name:partner_commission.menu_commission_account_group
+msgid "Account Groups"
+msgstr "Группы аккаунтов"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_agreement__group_id
+#: model_terms:ir.ui.view,arch_db:partner_commission.commission_account_view_search
+msgid "Account group"
+msgstr "Группа аккаунтов"
+
+#. module: partner_commission
+#: model_terms:ir.ui.view,arch_db:partner_commission.commission_account_group_view_form
+#: model_terms:ir.ui.view,arch_db:partner_commission.commission_agreement_view_form
+msgid "Accounts"
+msgstr "Аккаунты"
+
+#. module: partner_commission
+#: model:ir.actions.act_window,name:partner_commission.action_commission_account
+#: model:ir.ui.menu,name:partner_commission.menu_commission_account
+msgid "Accounts (Id Account)"
+msgstr "Аккаунты (Id Account)"
+
+#. module: partner_commission
+#: model:ir.model.fields,help:partner_commission.field_commission_account_group__unassigned_count
+msgid ""
+"Accounts in this group that are neither excluded nor assigned to any "
+"commission agreement yet."
+msgstr ""
+"Аккаунты этой группы, которые не исключены и ещё не назначены ни на одно "
+"соглашение по комиссии."
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_agreement__active
+msgid "Active"
+msgstr "Активно"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_account__agreement_id
+#: model:ir.model.fields,field_description:partner_commission.field_commission_agreement_rate__agreement_id
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__agreement_id
+#: model_terms:ir.ui.view,arch_db:partner_commission.commission_account_view_search
+#: model_terms:ir.ui.view,arch_db:partner_commission.commission_transaction_view_search
+msgid "Agreement"
+msgstr "Соглашение"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction_export__agreement_ids
+#: model:ir.ui.menu,name:partner_commission.menu_commission_agreement
+msgid "Agreements"
+msgstr "Соглашения"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__amount
+#: model_terms:ir.ui.view,arch_db:partner_commission.commission_transaction_view_list
+msgid "Amount"
+msgstr "Сумма"
+
+#. module: partner_commission
+#: model_terms:ir.actions.act_window,help:partner_commission.action_commission_agreement
+msgid ""
+"An agreement defines the partner, the commission scheme\n"
+"                (on top / inside) and the rates by payment method."
+msgstr ""
+"Соглашение определяет партнёра, схему комиссии\n"
+"                (сверху / внутри) и ставки по способу оплаты."
+
+#. module: partner_commission
+#: model:ir.model.fields,help:partner_commission.field_commission_transaction_export__include_registry_fields
+msgid ""
+"Append RefNo, Amount, Commission, Account and Date from the original "
+"transaction registry."
+msgstr ""
+"Добавить RefNo, Amount, Commission, Account и Date из исходного реестра "
+"транзакций."
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_account__effective_payer_type
+msgid "Applied scheme"
+msgstr "Применяемая схема"
+
+#. module: partner_commission
+#: model_terms:ir.ui.view,arch_db:partner_commission.commission_agreement_view_form
+#: model_terms:ir.ui.view,arch_db:partner_commission.commission_agreement_view_search
+msgid "Archived"
+msgstr "В архиве"
+
+#. module: partner_commission
+#: model_terms:ir.ui.view,arch_db:partner_commission.commission_agreement_view_form
+msgid "Assign group's unassigned accounts"
+msgstr "Назначить неразмеченные аккаунты группы"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_agreement__account_ids
+msgid "Assigned accounts"
+msgstr "Назначенные аккаунты"
+
+#. module: partner_commission
+#: model_terms:ir.ui.view,arch_db:partner_commission.commission_agreement_view_form
+msgid ""
+"Assigns every not-yet-assigned, not-excluded account of the selected group "
+"to this agreement."
+msgstr ""
+"Назначает на это соглашение все ещё не назначенные и не исключённые аккаунты"
+" выбранной группы."
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__auth_code
+msgid "Auth Code"
+msgstr "Auth Code"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__bank_ref
+msgid "BankRef (RRN)"
+msgstr "BankRef (RRN)"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__cops
+msgid "COPS"
+msgstr "COPS"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__cops_vat
+msgid "COPS VAT"
+msgstr "COPS VAT"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__cops_wo_vat
+msgid "COPS without VAT"
+msgstr "COPS без НДС"
+
+#. module: partner_commission
+#: model_terms:ir.ui.view,arch_db:partner_commission.commission_transaction_view_form
+msgid "Calculation"
+msgstr "Расчёт"
+
+#. module: partner_commission
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_account_rate__pay_method__card
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_agreement_rate__pay_method__card
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_transaction__pay_method__card
+msgid "Card"
+msgstr "Карта"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__card_info
+msgid "Card Info"
+msgstr "Card Info"
+
+#. module: partner_commission
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_account_import__state__choose
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_transaction_import__state__choose
+msgid "Choose file"
+msgstr "Выбор файла"
+
+#. module: partner_commission
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_transaction_export__state__choose
+msgid "Choose filters"
+msgstr "Выбор фильтров"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__client_pays
+#: model_terms:ir.ui.view,arch_db:partner_commission.commission_transaction_view_list
+msgid "Client pays"
+msgstr "Клиент платит"
+
+#. module: partner_commission
+#: model_terms:ir.ui.view,arch_db:partner_commission.commission_account_import_view_form
+#: model_terms:ir.ui.view,arch_db:partner_commission.commission_transaction_export_view_form
+#: model_terms:ir.ui.view,arch_db:partner_commission.commission_transaction_import_view_form
+msgid "Close"
+msgstr "Закрыть"
+
+#. module: partner_commission
+#. odoo-python
+#: code:addons/partner_commission/wizards/commission_account_import.py:0
+#: code:addons/partner_commission/wizards/commission_transaction_import.py:0
+msgid "Columns not found in the file (ignored): %s"
+msgstr "Колонки не найдены в файле (пропущены): %s"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__gw_commission
+msgid "Commission"
+msgstr "Commission"
+
+#. module: partner_commission
+#: model_terms:ir.ui.view,arch_db:partner_commission.commission_agreement_view_form
+msgid "Commission Agreement"
+msgstr "Соглашение по комиссии"
+
+#. module: partner_commission
+#: model:ir.actions.act_window,name:partner_commission.action_commission_agreement
+msgid "Commission Agreements"
+msgstr "Соглашения по комиссии"
+
+#. module: partner_commission
+#: model_terms:ir.ui.view,arch_db:partner_commission.commission_transaction_view_form
+msgid "Commission Transaction"
+msgstr "Транзакция комиссии"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__gw_commission_vat
+msgid "Commission VAT"
+msgstr "Commission VAT"
+
+#. module: partner_commission
+#: model:ir.model.fields,help:partner_commission.field_commission_account__agreement_id
+msgid ""
+"Commission agreement this account's transactions are booked against. Leave "
+"empty until you know which agreement it belongs to - unassigned accounts are"
+" rejected on registry import."
+msgstr ""
+"Соглашение по комиссии, на которое относятся транзакции этого аккаунта. "
+"Оставьте пустым, пока не известно, к какому соглашению он относится — "
+"неразмеченные аккаунты отклоняются при импорте реестра."
+
+#. module: partner_commission
+#: model_terms:ir.ui.view,arch_db:partner_commission.commission_agreement_view_search
+msgid "Commission inside"
+msgstr "Комиссия внутри"
+
+#. module: partner_commission
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_account__effective_payer_type__partner
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_account__payer_type_override__partner
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_agreement__payer_type__partner
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_transaction__payer_type__partner
+msgid "Commission inside (paid by the partner)"
+msgstr "Комиссия внутри (платит партнёр)"
+
+#. module: partner_commission
+#: model_terms:ir.ui.view,arch_db:partner_commission.commission_agreement_view_search
+msgid "Commission on top"
+msgstr "Комиссия сверху"
+
+#. module: partner_commission
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_account__effective_payer_type__client
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_account__payer_type_override__client
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_agreement__payer_type__client
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_transaction__payer_type__client
+msgid "Commission on top (paid by the client)"
+msgstr "Комиссия сверху (платит клиент)"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__gw_commission_wo_vat
+msgid "Commission without VAT"
+msgstr "Commission without VAT"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_agreement__company_id
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__company_id
+msgid "Company"
+msgstr "Компания"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__company_name
+msgid "Company Name"
+msgstr "Company Name"
+
+#. module: partner_commission
+#: model_terms:ir.ui.view,arch_db:partner_commission.commission_transaction_view_search
+msgid "Complete"
+msgstr "Завершено"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__confirmation_date
+msgid "Confirmation Date"
+msgstr "Confirmation Date"
+
+#. module: partner_commission
+#: model:ir.model.fields,help:partner_commission.field_commission_agreement__partner_id
+#: model:ir.model.fields,help:partner_commission.field_commission_transaction__partner_id
+msgid ""
+"Counterparty of the agreement (management company, developer, insurer...)."
+msgstr ""
+"Контрагент по соглашению (управляющая компания, застройщик, страховая...)."
+
+#. module: partner_commission
+#: model_terms:ir.actions.act_window,help:partner_commission.action_commission_agreement
+msgid "Create a partner commission agreement"
+msgstr "Создать соглашение по комиссии партнёра"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_account_import__created_count
+msgid "Created Count"
+msgstr "Количество созданных"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_account__create_uid
+#: model:ir.model.fields,field_description:partner_commission.field_commission_account_group__create_uid
+#: model:ir.model.fields,field_description:partner_commission.field_commission_account_import__create_uid
+#: model:ir.model.fields,field_description:partner_commission.field_commission_account_rate__create_uid
+#: model:ir.model.fields,field_description:partner_commission.field_commission_agreement__create_uid
+#: model:ir.model.fields,field_description:partner_commission.field_commission_agreement_rate__create_uid
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__create_uid
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction_export__create_uid
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction_import__create_uid
+msgid "Created by"
+msgstr "Создано пользователем"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_account__create_date
+#: model:ir.model.fields,field_description:partner_commission.field_commission_account_group__create_date
+#: model:ir.model.fields,field_description:partner_commission.field_commission_account_import__create_date
+#: model:ir.model.fields,field_description:partner_commission.field_commission_account_rate__create_date
+#: model:ir.model.fields,field_description:partner_commission.field_commission_agreement__create_date
+#: model:ir.model.fields,field_description:partner_commission.field_commission_agreement_rate__create_date
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__create_date
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction_export__create_date
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction_import__create_date
+msgid "Created on"
+msgstr "Дата создания"
+
+#. module: partner_commission
+#. odoo-python
+#: code:addons/partner_commission/wizards/commission_account_import.py:0
+msgid "Created: %(created)s, updated: %(updated)s, errors: %(errors)s."
+msgstr "Создано: %(created)s, обновлено: %(updated)s, ошибок: %(errors)s."
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_agreement__currency_id
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__currency_id
+msgid "Currency"
+msgstr "Валюта"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__currency_name
+msgid "Currency (raw)"
+msgstr "Currency (как в реестре)"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__date
+#: model_terms:ir.ui.view,arch_db:partner_commission.commission_transaction_view_search
+msgid "Date"
+msgstr "Дата"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction_export__date_from
+msgid "Date From"
+msgstr "Дата с"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction_export__date_to
+msgid "Date To"
+msgstr "Дата по"
+
+#. module: partner_commission
+#: model:ir.model.fields,help:partner_commission.field_commission_agreement__group_id
+msgid ""
+"Default 'Group / Company ID' from the accounts directory this agreement's "
+"accounts are picked from. Used by the 'Assign accounts' action and to browse"
+" the group's accounts; an agreement can still hold accounts from other "
+"groups if assigned manually."
+msgstr ""
+"Группа/Company ID по умолчанию из справочника аккаунтов, из которой "
+"выбираются аккаунты этого соглашения. Используется действием «Назначить "
+"аккаунты» и для просмотра аккаунтов группы; соглашение может содержать "
+"аккаунты и из других групп, если назначить их вручную."
+
+#. module: partner_commission
+#: model:ir.model.fields,help:partner_commission.field_commission_transaction__pay_method
+msgid ""
+"Derived from the raw 'Pay Method' field on import. Can be corrected manually"
+" if the automatic match is wrong."
+msgstr ""
+"Определяется из поля 'Pay Method' реестра при импорте. Можно исправить "
+"вручную, если автоматическое определение ошиблось."
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__account_id
+msgid "Directory account"
+msgstr "Аккаунт из справочника"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_account_import__file
+msgid "Directory file (xlsx or csv)"
+msgstr "Файл справочника (xlsx или csv)"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_account__display_name
+#: model:ir.model.fields,field_description:partner_commission.field_commission_account_group__display_name
+#: model:ir.model.fields,field_description:partner_commission.field_commission_account_import__display_name
+#: model:ir.model.fields,field_description:partner_commission.field_commission_account_rate__display_name
+#: model:ir.model.fields,field_description:partner_commission.field_commission_agreement__display_name
+#: model:ir.model.fields,field_description:partner_commission.field_commission_agreement_rate__display_name
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__display_name
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction_export__display_name
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction_import__display_name
+msgid "Display Name"
+msgstr "Отображаемое имя"
+
+#. module: partner_commission
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_account_import__state__done
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_transaction_export__state__done
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_transaction_import__state__done
+msgid "Done"
+msgstr "Готово"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_account__enabled
+msgid "Enabled"
+msgstr "Активен"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_account_import__error_count
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction_import__error_count
+msgid "Error Count"
+msgstr "Количество ошибок"
+
+#. module: partner_commission
+#: model_terms:ir.ui.view,arch_db:partner_commission.commission_account_view_search
+msgid "Excluded"
+msgstr "Исключён"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction_import__excluded_count
+msgid "Excluded Count"
+msgstr "Количество исключённых"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_account__excluded
+msgid "Excluded from calculation"
+msgstr "Исключён из расчёта"
+
+#. module: partner_commission
+#: model_terms:ir.ui.view,arch_db:partner_commission.commission_account_import_view_form
+msgid ""
+"Expects columns: ACC ID, NAME, MERCH CODE, INN, OGRN,\n"
+"                        Enabled, Group|COMPANY ID. Existing accounts are\n"
+"                        updated by ACC ID; their Agreement, Scheme override\n"
+"                        and Excluded flag are never changed by this import."
+msgstr ""
+"Ожидаются колонки: ACC ID, NAME, MERCH CODE, INN, OGRN,\n"
+"                        Enabled, Group|COMPANY ID. Существующие аккаунты\n"
+"                        обновляются по ACC ID; их Agreement, переопределение схемы\n"
+"                        и флаг «Исключён» этот импорт никогда не меняет."
+
+#. module: partner_commission
+#: model_terms:ir.ui.view,arch_db:partner_commission.commission_transaction_export_view_form
+msgid "Export"
+msgstr "Экспорт"
+
+#. module: partner_commission
+#: model:ir.model,name:partner_commission.model_commission_transaction_export
+msgid "Export Partner Commission Results"
+msgstr "Экспорт результатов по комиссии партнёра"
+
+#. module: partner_commission
+#: model:ir.actions.act_window,name:partner_commission.action_commission_transaction_export
+#: model:ir.ui.menu,name:partner_commission.menu_commission_transaction_export
+#: model_terms:ir.ui.view,arch_db:partner_commission.commission_transaction_export_view_form
+msgid "Export Results"
+msgstr "Экспорт результатов"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction_import__agreement_id
+msgid "Fallback agreement"
+msgstr "Резервное соглашение"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction_export__file
+msgid "File"
+msgstr "Файл"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_account_import__filename
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction_export__filename
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction_import__filename
+msgid "Filename"
+msgstr "Имя файла"
+
+#. module: partner_commission
+#: model:ir.model.fields,help:partner_commission.field_commission_agreement__name
+msgid "Free label, e.g. 'ЖКУ 0.45%'."
+msgstr "Произвольное название, например «ЖКУ 0.45%»."
+
+#. module: partner_commission
+#: model:ir.model.fields,help:partner_commission.field_commission_account__services_exception
+msgid ""
+"Free-text note for a services-based exception on this account (e.g. a "
+"contractual MCC exclusion). Informational only - not used in the commission "
+"calculation - but carried through to the transaction export as-is."
+msgstr ""
+"Свободный текст об исключении по услугам для этого аккаунта (например, "
+"договорное исключение по MCC). Только информационно — на расчёт комиссии не "
+"влияет, но переносится в экспорт транзакций как есть."
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__gross_profit_raw
+msgid "GrossProfit (raw)"
+msgstr "GrossProfit (как в реестре)"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_account__group_id
+#: model:ir.model.fields,field_description:partner_commission.field_commission_account_group__code
+msgid "Group / Company ID"
+msgstr "Группа / Company ID"
+
+#. module: partner_commission
+#: model_terms:ir.ui.view,arch_db:partner_commission.commission_account_view_search
+#: model_terms:ir.ui.view,arch_db:partner_commission.commission_agreement_view_search
+#: model_terms:ir.ui.view,arch_db:partner_commission.commission_transaction_view_search
+msgid "Group By"
+msgstr "Группировать по"
+
+#. module: partner_commission
+#: model_terms:ir.ui.view,arch_db:partner_commission.commission_account_view_search
+msgid "Head accounts"
+msgstr "Головные аккаунты"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_account__id
+#: model:ir.model.fields,field_description:partner_commission.field_commission_account_group__id
+#: model:ir.model.fields,field_description:partner_commission.field_commission_account_import__id
+#: model:ir.model.fields,field_description:partner_commission.field_commission_account_rate__id
+#: model:ir.model.fields,field_description:partner_commission.field_commission_agreement__id
+#: model:ir.model.fields,field_description:partner_commission.field_commission_agreement_rate__id
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__id
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction_export__id
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction_import__id
+msgid "ID"
+msgstr "ID"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_account__inn
+msgid "INN"
+msgstr "ИНН"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_account__acc_id
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__id_account
+msgid "Id Account"
+msgstr "Id Account"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__identity_card
+msgid "Identity Card"
+msgstr "Identity Card"
+
+#. module: partner_commission
+#: model_terms:ir.ui.view,arch_db:partner_commission.commission_account_import_view_form
+#: model_terms:ir.ui.view,arch_db:partner_commission.commission_transaction_import_view_form
+msgid "Import"
+msgstr "Импорт"
+
+#. module: partner_commission
+#: model:ir.actions.act_window,name:partner_commission.action_commission_account_import
+#: model:ir.model,name:partner_commission.model_commission_account_import
+#: model:ir.ui.menu,name:partner_commission.menu_commission_account_import
+#: model_terms:ir.ui.view,arch_db:partner_commission.commission_account_import_view_form
+msgid "Import Accounts Directory"
+msgstr "Импорт справочника аккаунтов"
+
+#. module: partner_commission
+#: model:ir.model,name:partner_commission.model_commission_transaction_import
+msgid "Import Partner Commission Transaction Registry"
+msgstr "Импорт реестра транзакций по комиссии партнёра"
+
+#. module: partner_commission
+#: model:ir.ui.menu,name:partner_commission.menu_commission_transaction_import
+msgid "Import Registry"
+msgstr "Импорт реестра"
+
+#. module: partner_commission
+#: model:ir.actions.act_window,name:partner_commission.action_commission_transaction_import
+#: model_terms:ir.ui.view,arch_db:partner_commission.commission_transaction_import_view_form
+msgid "Import Transaction Registry"
+msgstr "Импорт реестра транзакций"
+
+#. module: partner_commission
+#: model_terms:ir.actions.act_window,help:partner_commission.action_commission_transaction
+msgid ""
+"Import a registry file from an agreement to see transactions\n"
+"                and their calculated commission here."
+msgstr ""
+"Импортируйте файл реестра для соглашения, чтобы увидеть здесь\n"
+"                транзакции и рассчитанную по ним комиссию."
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction_import__imported_count
+msgid "Imported Count"
+msgstr "Количество импортированных"
+
+#. module: partner_commission
+#. odoo-python
+#: code:addons/partner_commission/wizards/commission_transaction_import.py:0
+msgid ""
+"Imported: %(imported)s, skipped duplicates: %(skipped)s, excluded accounts: "
+"%(excluded)s, errors: %(errors)s."
+msgstr ""
+"Импортировано: %(imported)s, пропущено дублей: %(skipped)s, исключённых "
+"аккаунтов: %(excluded)s, ошибок: %(errors)s."
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction_export__include_registry_fields
+msgid "Include registry fields"
+msgstr "Включить поля реестра"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_account__is_head
+msgid "Is Head"
+msgstr "Головной аккаунт"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_account__write_uid
+#: model:ir.model.fields,field_description:partner_commission.field_commission_account_group__write_uid
+#: model:ir.model.fields,field_description:partner_commission.field_commission_account_import__write_uid
+#: model:ir.model.fields,field_description:partner_commission.field_commission_account_rate__write_uid
+#: model:ir.model.fields,field_description:partner_commission.field_commission_agreement__write_uid
+#: model:ir.model.fields,field_description:partner_commission.field_commission_agreement_rate__write_uid
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__write_uid
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction_export__write_uid
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction_import__write_uid
+msgid "Last Updated by"
+msgstr "Последнее обновление от"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_account__write_date
+#: model:ir.model.fields,field_description:partner_commission.field_commission_account_group__write_date
+#: model:ir.model.fields,field_description:partner_commission.field_commission_account_import__write_date
+#: model:ir.model.fields,field_description:partner_commission.field_commission_account_rate__write_date
+#: model:ir.model.fields,field_description:partner_commission.field_commission_agreement__write_date
+#: model:ir.model.fields,field_description:partner_commission.field_commission_agreement_rate__write_date
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__write_date
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction_export__write_date
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction_import__write_date
+msgid "Last Updated on"
+msgstr "Дата последнего обновления"
+
+#. module: partner_commission
+#: model_terms:ir.ui.view,arch_db:partner_commission.commission_agreement_view_form
+msgid "Last calendar month"
+msgstr "Последний календарный месяц"
+
+#. module: partner_commission
+#: model:ir.model.fields,help:partner_commission.field_commission_transaction_export__agreement_ids
+msgid "Leave empty to export every agreement."
+msgstr "Оставьте пустым, чтобы выгрузить все соглашения."
+
+#. module: partner_commission
+#: model:ir.model.fields,help:partner_commission.field_commission_account__payer_type_override
+msgid ""
+"Leave empty to use the agreement's default scheme. Set this only when a "
+"single account group mixes both schemes."
+msgstr ""
+"Оставьте пустым, чтобы использовать схему по умолчанию с соглашения. "
+"Задавайте только если в одной группе аккаунтов смешаны обе схемы."
+
+#. module: partner_commission
+#: model_terms:ir.ui.view,arch_db:partner_commission.commission_transaction_export_view_form
+msgid ""
+"Leave filters empty to export every agreement / all\n"
+"                        dates. The CSV uses ';' as the field delimiter and '.'\n"
+"                        as the decimal separator. Enable \"Include registry\n"
+"                        fields\" to append RefNo, Amount, Commission, Commission VAT, Commission without VAT, Id Account, BankRef (RRN), Date fields."
+msgstr ""
+"Оставьте фильтры пустыми, чтобы выгрузить все соглашения и все\n"
+"                        даты. CSV использует ';' как разделитель полей и '.'\n"
+"                        как десятичный разделитель. Включите «Включить поля\n"
+"                        реестра», чтобы добавить RefNo, Amount, Commission, Commission VAT, Commission without VAT, Id Account, BankRef (RRN), Date."
+
+#. module: partner_commission
+#. odoo-python
+#: code:addons/partner_commission/wizards/commission_transaction_import.py:0
+msgid "Line %s: %s"
+msgstr "Строка %s: %s"
+
+#. module: partner_commission
+#. odoo-python
+#: code:addons/partner_commission/wizards/commission_transaction_import.py:0
+msgid "Line %s: could not resolve an agreement, skipped."
+msgstr "Строка %s: не удалось определить соглашение, пропущена."
+
+#. module: partner_commission
+#. odoo-python
+#: code:addons/partner_commission/wizards/commission_account_import.py:0
+msgid "Line %s: missing ACC ID, skipped."
+msgstr "Строка %s: отсутствует ACC ID, пропущена."
+
+#. module: partner_commission
+#. odoo-python
+#: code:addons/partner_commission/wizards/commission_transaction_import.py:0
+msgid "Line %s: missing RefNo, skipped."
+msgstr "Строка %s: отсутствует RefNo, пропущена."
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_account_import__log
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction_import__log
+msgid "Log"
+msgstr "Журнал"
+
+#. module: partner_commission
+#: model:ir.module.category,description:partner_commission.module_category_partner_commission
+msgid "Manage partner commission agreements and transactions."
+msgstr "Управление соглашениями и транзакциями по комиссии партнёров."
+
+#. module: partner_commission
+#: model:res.groups,name:partner_commission.group_commission_manager
+msgid "Manager"
+msgstr "Менеджер"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_account__merch_code
+msgid "Merchant code"
+msgstr "Код мерчанта"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_account__name
+msgid "Merchant name"
+msgstr "Название мерчанта"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__nko_fee
+#: model_terms:ir.ui.view,arch_db:partner_commission.commission_transaction_view_list
+msgid "NKO fee"
+msgstr "Вознаграждение НКО"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__nko_vat
+msgid "NKO fee VAT"
+msgstr "НДС вознаграждения НКО"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_account_rate__nko_rate
+#: model:ir.model.fields,field_description:partner_commission.field_commission_agreement_rate__nko_rate
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__nko_rate
+msgid "NKO fee rate (%)"
+msgstr "Ставка вознаграждения НКО (%)"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__nko_fee_wo_vat
+msgid "NKO fee without VAT"
+msgstr "Вознаграждение НКО без НДС"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_account_group__name
+#: model:ir.model.fields,field_description:partner_commission.field_commission_agreement__name
+msgid "Name"
+msgstr "Название"
+
+#. module: partner_commission
+#: model_terms:ir.actions.act_window,help:partner_commission.action_commission_account
+msgid "No accounts yet"
+msgstr "Пока нет аккаунтов"
+
+#. module: partner_commission
+#. odoo-python
+#: code:addons/partner_commission/wizards/commission_transaction_import.py:0
+msgid "No data rows found in the file."
+msgstr "В файле не найдено строк с данными."
+
+#. module: partner_commission
+#: model_terms:ir.actions.act_window,help:partner_commission.action_commission_transaction
+msgid "No transactions yet"
+msgstr "Пока нет транзакций"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_agreement__notes
+#: model_terms:ir.ui.view,arch_db:partner_commission.commission_agreement_view_form
+msgid "Notes"
+msgstr "Заметки"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_account__ogrn
+msgid "OGRN"
+msgstr "ОГРН"
+
+#. module: partner_commission
+#: model:ir.model.fields,help:partner_commission.field_commission_account__rate_override_ids
+msgid ""
+"Optional per-account rate, by payment method. If there is no override row "
+"for a payment method, the agreement's own rate for it applies."
+msgstr ""
+"Необязательная ставка по конкретному аккаунту, по способу оплаты. Если "
+"строки переопределения для способа оплаты нет, применяется ставка с "
+"соглашения."
+
+#. module: partner_commission
+#: model_terms:ir.ui.view,arch_db:partner_commission.commission_account_view_form
+msgid ""
+"Optional: override the agreement's rate for\n"
+"                                this account, by payment method. Leave empty\n"
+"                                to use the agreement's own rates."
+msgstr ""
+"Необязательно: переопределить ставку соглашения для\n"
+"                                этого аккаунта, по способу оплаты. Оставьте пустым,\n"
+"                                чтобы использовать ставки соглашения."
+
+#. module: partner_commission
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_transaction__pay_method__other
+msgid "Other / not recognized"
+msgstr "Другое / не распознано"
+
+#. module: partner_commission
+#: model:ir.model.fields,help:partner_commission.field_commission_account_rate__nko_rate
+msgid ""
+"Overrides the agreement's NKO fee rate for this account and payment method."
+msgstr ""
+"Переопределяет ставку вознаграждения НКО соглашения для этого аккаунта и "
+"способа оплаты."
+
+#. module: partner_commission
+#: model:ir.model.fields,help:partner_commission.field_commission_account_rate__partner_rate
+msgid ""
+"Overrides the agreement's partner commission rate for this account and "
+"payment method."
+msgstr ""
+"Переопределяет ставку комиссии партнёра соглашения для этого аккаунта и "
+"способа оплаты."
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_agreement__partner_id
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__partner_id
+#: model_terms:ir.ui.view,arch_db:partner_commission.commission_agreement_view_search
+msgid "Partner"
+msgstr "Партнёр"
+
+#. module: partner_commission
+#: model:ir.module.category,name:partner_commission.module_category_partner_commission
+#: model:ir.ui.menu,name:partner_commission.menu_commission_root
+msgid "Partner Commission"
+msgstr "Комиссия партнёра"
+
+#. module: partner_commission
+#: model:ir.model,name:partner_commission.model_commission_account_rate
+msgid "Partner Commission Account Rate Override"
+msgstr "Переопределение ставки аккаунта по комиссии партнёра"
+
+#. module: partner_commission
+#: model:ir.model,name:partner_commission.model_commission_agreement
+msgid "Partner Commission Agreement"
+msgstr "Соглашение по комиссии партнёра"
+
+#. module: partner_commission
+#: model:ir.model,name:partner_commission.model_commission_agreement_rate
+msgid "Partner Commission Agreement Rate"
+msgstr "Ставка соглашения по комиссии партнёра"
+
+#. module: partner_commission
+#: model:ir.model,name:partner_commission.model_commission_transaction
+msgid "Partner Commission Transaction"
+msgstr "Транзакция по комиссии партнёра"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__partner_commission
+#: model_terms:ir.ui.view,arch_db:partner_commission.commission_transaction_view_list
+msgid "Partner commission"
+msgstr "Комиссия партнёра"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_account_rate__partner_rate
+#: model:ir.model.fields,field_description:partner_commission.field_commission_agreement_rate__partner_rate
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__partner_rate
+msgid "Partner commission rate (%)"
+msgstr "Ставка комиссии партнёра (%)"
+
+#. module: partner_commission
+#: model:ir.model.fields,help:partner_commission.field_commission_agreement_rate__partner_rate
+msgid "Partner commission rate, as a percentage of the transaction amount."
+msgstr "Ставка комиссии партнёра, в процентах от суммы транзакции."
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__partner_receives
+#: model_terms:ir.ui.view,arch_db:partner_commission.commission_transaction_view_list
+msgid "Partner receives"
+msgstr "Партнёр получает"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__pay_method_raw
+msgid "Pay Method"
+msgstr "Pay Method"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__pay_method_bank
+msgid "PayMethod Bank"
+msgstr "PayMethod Bank"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_agreement__payer_type
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__payer_type
+msgid "Payer Type"
+msgstr "Плательщик комиссии"
+
+#. module: partner_commission
+#: model:ir.model,name:partner_commission.model_commission_account
+msgid "Payment Gateway Account (Id Account)"
+msgstr "Аккаунт платёжного шлюза (Id Account)"
+
+#. module: partner_commission
+#: model:ir.model,name:partner_commission.model_commission_account_group
+msgid "Payment Gateway Account Group (Company ID)"
+msgstr "Группа аккаунтов платёжного шлюза (Company ID)"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_account_rate__pay_method
+#: model:ir.model.fields,field_description:partner_commission.field_commission_agreement_rate__pay_method
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__pay_method
+#: model_terms:ir.ui.view,arch_db:partner_commission.commission_transaction_view_search
+msgid "Payment method"
+msgstr "Способ оплаты"
+
+#. module: partner_commission
+#. odoo-python
+#: code:addons/partner_commission/wizards/commission_account_import.py:0
+#: code:addons/partner_commission/wizards/commission_transaction_import.py:0
+msgid "Please select a file."
+msgstr "Выберите файл."
+
+#. module: partner_commission
+#: model:ir.model.fields,help:partner_commission.field_commission_agreement_rate__nko_rate
+msgid ""
+"Processing fee rate charged by the settlement organization (NKO), as a "
+"percentage of the transaction amount."
+msgstr ""
+"Ставка комиссии за обработку, взимаемой расчётной небанковской кредитной "
+"организацией (НКО), в процентах от суммы транзакции."
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__rc
+msgid "RC"
+msgstr "RC"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_account__rate_override_ids
+#: model_terms:ir.ui.view,arch_db:partner_commission.commission_account_view_form
+msgid "Rate overrides"
+msgstr "Переопределения ставок"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_agreement__rate_line_ids
+#: model_terms:ir.ui.view,arch_db:partner_commission.commission_agreement_view_form
+msgid "Rates by payment method"
+msgstr "Ставки по способу оплаты"
+
+#. module: partner_commission
+#. odoo-python
+#: code:addons/partner_commission/models/commission_account_rate.py:0
+#: code:addons/partner_commission/models/commission_agreement_rate.py:0
+msgid "Rates cannot be negative."
+msgstr "Ставки не могут быть отрицательными."
+
+#. module: partner_commission
+#: model:ir.actions.server,name:partner_commission.server_action_recompute_all_commission_transactions
+msgid "Recompute all commission transactions"
+msgstr "Пересчитать все транзакции по комиссии"
+
+#. module: partner_commission
+#: model:ir.ui.menu,name:partner_commission.menu_recompute_commission_transactions
+msgid "Recompute transactions"
+msgstr "Пересчитать транзакции"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__ref_no
+msgid "RefNo"
+msgstr "RefNo"
+
+#. module: partner_commission
+#: model_terms:ir.ui.view,arch_db:partner_commission.commission_transaction_view_form
+msgid "Registry data"
+msgstr "Данные реестра"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction_import__file
+msgid "Registry file (xlsx or csv)"
+msgstr "Файл реестра (xlsx или csv)"
+
+#. module: partner_commission
+#. odoo-python
+#: code:addons/partner_commission/wizards/commission_account_import.py:0
+msgid "Required column '%s' not found in the file."
+msgstr "Обязательная колонка '%s' не найдена в файле."
+
+#. module: partner_commission
+#. odoo-python
+#: code:addons/partner_commission/wizards/commission_account_import.py:0
+msgid "Required column 'ACC ID' not found in the file."
+msgstr "Обязательная колонка 'ACC ID' не найдена в файле."
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction_export__row_count
+msgid "Row Count"
+msgstr "Количество строк"
+
+#. module: partner_commission
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_account_rate__pay_method__sbp
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_agreement_rate__pay_method__sbp
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_transaction__pay_method__sbp
+msgid "SBP (Faster Payments)"
+msgstr "СБП (быстрые платежи)"
+
+#. module: partner_commission
+#: model_terms:ir.ui.view,arch_db:partner_commission.commission_agreement_view_search
+msgid "Scheme"
+msgstr "Схема"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_account__payer_type_override
+msgid "Scheme override"
+msgstr "Переопределение схемы"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_account__services_exception
+msgid "Services exception"
+msgstr "Исключение по услугам"
+
+#. module: partner_commission
+#. odoo-python
+#: code:addons/partner_commission/models/commission_agreement.py:0
+msgid "Set an account group on the agreement first."
+msgstr "Сначала укажите группу аккаунтов на соглашении."
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction_import__skipped_count
+msgid "Skipped Count"
+msgstr "Количество пропущенных"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_account_import__state
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction_export__state
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction_import__state
+msgid "State"
+msgstr "Состояние"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__status
+#: model_terms:ir.ui.view,arch_db:partner_commission.commission_transaction_view_search
+msgid "Status"
+msgstr "Статус"
+
+#. module: partner_commission
+#: model:ir.model.fields,help:partner_commission.field_commission_agreement__total_amount_last_month
+msgid ""
+"Sum over the previous full calendar month (e.g. all of August, if today is "
+"in September)."
+msgstr ""
+"Сумма за предыдущий полный календарный месяц (например, весь август, если "
+"сегодня сентябрь)."
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__terminal
+msgid "Terminal"
+msgstr "Terminal"
+
+#. module: partner_commission
+#: model:ir.model.fields,help:partner_commission.field_commission_transaction__account_id
+msgid ""
+"The accounts-directory entry matched by 'Id Account' on import, if any. Used"
+" to resolve the agreement and to apply a per-account scheme override."
+msgstr ""
+"Запись справочника аккаунтов, найденная по 'Id Account' при импорте, если "
+"есть. Используется для определения соглашения и применения переопределения "
+"схемы по аккаунту."
+
+#. module: partner_commission
+#: model_terms:ir.ui.view,arch_db:partner_commission.commission_transaction_import_view_form
+msgid ""
+"The agreement is normally resolved automatically per\n"
+"                        row from the accounts directory (Id Account -&gt;\n"
+"                        group -&gt; agreement). Only set a fallback above for\n"
+"                        rows whose account isn't in the directory yet, or\n"
+"                        isn't assigned to any agreement yet."
+msgstr ""
+"Соглашение обычно определяется автоматически по каждой\n"
+"                        строке через справочник аккаунтов (Id Account -&gt;\n"
+"                        группа -&gt; соглашение). Резервное соглашение задавайте выше только для\n"
+"                        строк, чей аккаунт ещё не в справочнике или\n"
+"                        ещё не назначен ни на одно соглашение."
+
+#. module: partner_commission
+#: model:ir.model.fields,help:partner_commission.field_commission_account__effective_payer_type
+msgid ""
+"The scheme actually used to compute commission on this account's "
+"transactions: the override above if set, otherwise the agreement's default. "
+"Empty if not assigned to any agreement."
+msgstr ""
+"Схема, фактически применяемая при расчёте комиссии по транзакциям этого "
+"аккаунта: переопределение выше, если задано, иначе — схема по умолчанию с "
+"соглашения. Пусто, если аккаунт не назначен ни на одно соглашение."
+
+#. module: partner_commission
+#: model:ir.model.constraint,message:partner_commission.constraint_commission_agreement_rate_agreement_pay_method_uniq
+msgid ""
+"There is already a rate defined for this payment method on this agreement."
+msgstr "Для этого способа оплаты на этом соглашении ставка уже задана."
+
+#. module: partner_commission
+#: model:ir.model.constraint,message:partner_commission.constraint_commission_account_rate_account_pay_method_uniq
+msgid ""
+"There is already a rate override for this payment method on this account."
+msgstr ""
+"Для этого способа оплаты на этом аккаунте переопределение ставки уже задано."
+
+#. module: partner_commission
+#: model:ir.model.constraint,message:partner_commission.constraint_commission_account_acc_id_uniq
+msgid "This Id Account already exists."
+msgstr "Такой Id Account уже существует."
+
+#. module: partner_commission
+#: model:ir.model.fields,help:partner_commission.field_commission_account__is_head
+msgid ""
+"This account's id is the group's own id: usually the platform's own "
+"technical/service account for the group, not a real merchant."
+msgstr ""
+"Id этого аккаунта совпадает с id самой группы: обычно это "
+"технический/служебный аккаунт площадки для группы, а не реальный мерчант."
+
+#. module: partner_commission
+#: model:ir.model.constraint,message:partner_commission.constraint_commission_account_group_code_uniq
+msgid "This group already exists."
+msgstr "Такая группа уже существует."
+
+#. module: partner_commission
+#: model:ir.model.constraint,message:partner_commission.constraint_commission_transaction_agreement_ref_no_uniq
+msgid "This transaction (RefNo) has already been imported for this agreement."
+msgstr "Эта транзакция (RefNo) уже была импортирована для этого соглашения."
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_agreement__total_amount
+msgid "Total Amount"
+msgstr "Общая сумма"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_agreement__total_amount_last_month
+msgid "Total Amount (last month)"
+msgstr "Общая сумма (за месяц)"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_agreement__total_nko_fee_last_month
+msgid "Total NKO Fee (last month)"
+msgstr "Общее вознаграждение НКО (за месяц)"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_agreement__total_nko_fee
+msgid "Total Nko Fee"
+msgstr "Общее вознаграждение НКО"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_agreement__total_partner_commission
+msgid "Total Partner Commission"
+msgstr "Общая комиссия партнёра"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_agreement__total_partner_commission_last_month
+msgid "Total Partner Commission (last month)"
+msgstr "Общая комиссия партнёра (за месяц)"
+
+#. module: partner_commission
+#: model_terms:ir.ui.view,arch_db:partner_commission.commission_agreement_view_list
+msgid "Total amount"
+msgstr "Общая сумма"
+
+#. module: partner_commission
+#: model_terms:ir.ui.view,arch_db:partner_commission.commission_agreement_view_list
+msgid "Total commission"
+msgstr "Общая комиссия"
+
+#. module: partner_commission
+#: model_terms:ir.ui.view,arch_db:partner_commission.commission_transaction_view_form
+msgid "Transaction"
+msgstr "Транзакция"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_agreement__transaction_count
+msgid "Transaction Count"
+msgstr "Количество транзакций"
+
+#. module: partner_commission
+#: model:ir.actions.act_window,name:partner_commission.action_commission_transaction
+#: model:ir.model.fields,field_description:partner_commission.field_commission_agreement__transaction_ids
+#: model:ir.ui.menu,name:partner_commission.menu_commission_transaction
+#: model_terms:ir.ui.view,arch_db:partner_commission.commission_agreement_view_form
+msgid "Transactions"
+msgstr "Транзакции"
+
+#. module: partner_commission
+#: model:ir.model.fields,help:partner_commission.field_commission_account__excluded
+msgid ""
+"Transactions on this account are imported for the record but never counted "
+"towards any agreement's commission."
+msgstr ""
+"Транзакции этого аккаунта импортируются для учёта, но никогда не входят в "
+"расчёт комиссии ни по одному соглашению."
+
+#. module: partner_commission
+#: model_terms:ir.ui.view,arch_db:partner_commission.commission_account_view_search
+msgid "Unassigned"
+msgstr "Не назначен"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_account_group__unassigned_count
+msgid "Unassigned Count"
+msgstr "Количество неразмеченных"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__erp_id
+msgid "Unique Accounting ERP identifier"
+msgstr "Unique Accounting ERP identifier"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_account_import__updated_count
+msgid "Updated Count"
+msgstr "Количество обновлённых"
+
+#. module: partner_commission
+#: model_terms:ir.actions.act_window,help:partner_commission.action_commission_account
+msgid ""
+"Use \"Import Accounts Directory\" to load the gateway's\n"
+"                accounts export first."
+msgstr ""
+"Сначала загрузите выгрузку аккаунтов через «Импорт справочника\n"
+"                аккаунтов»."
+
+#. module: partner_commission
+#: model:ir.model.fields,help:partner_commission.field_commission_transaction_import__agreement_id
+msgid ""
+"Used only for rows whose 'Id Account' is not found in the accounts "
+"directory, or found but not yet assigned to any agreement. Leave empty to "
+"reject such rows instead, so you notice and fix the directory."
+msgstr ""
+"Используется только для строк, чей 'Id Account' не найден в справочнике "
+"аккаунтов, либо найден, но ещё не назначен ни на одно соглашение. Оставьте "
+"пустым, чтобы такие строки отклонялись — тогда вы заметите и поправите "
+"справочник."
+
+#. module: partner_commission
+#: model:res.groups,name:partner_commission.group_commission_user
+msgid "User"
+msgstr "Пользователь"
+
+#. module: partner_commission
+#: model:ir.model.fields,help:partner_commission.field_commission_account_group__name
+msgid "Usually taken from the head account's name."
+msgstr "Обычно берётся из названия головного аккаунта."
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_agreement__vat_rate
+msgid "VAT rate on NKO fee (%)"
+msgstr "Ставка НДС на вознаграждение НКО (%)"
+
+#. module: partner_commission
+#: model:ir.model.fields,help:partner_commission.field_commission_agreement__vat_rate
+msgid ""
+"VAT rate used to split the processing fee (NKO fee) into its VAT and VAT-"
+"free parts."
+msgstr ""
+"Ставка НДС, используемая для разделения комиссии за обработку "
+"(вознаграждения НКО) на НДС и сумму без НДС."
+
+#. module: partner_commission
+#: model_terms:ir.ui.view,arch_db:partner_commission.commission_transaction_import_view_form
+msgid "View transactions"
+msgstr "Показать транзакции"
+
+#. module: partner_commission
+#: model:ir.model.fields,help:partner_commission.field_commission_agreement__payer_type
+msgid ""
+"Who effectively bears the commission by default for accounts assigned to this agreement:\n"
+"* Commission on top: the client pays the transaction amount plus the commission; the partner receives the full amount.\n"
+"* Commission inside: the client pays only the transaction amount; the commission is deducted from what the partner receives.\n"
+"A specific account can override this on the accounts directory when a group mixes both schemes."
+msgstr ""
+"Кто по умолчанию фактически несёт комиссию для аккаунтов, назначенных на это соглашение:\n"
+"* Комиссия сверху: клиент платит сумму транзакции плюс комиссию; партнёр получает полную сумму.\n"
+"* Комиссия внутри: клиент платит только сумму транзакции; комиссия удерживается из суммы, которую получает партнёр.\n"
+"Конкретный аккаунт может переопределить это в справочнике аккаунтов, если в группе смешаны обе схемы."
+
+#. module: partner_commission
+#: model:ir.model.fields,help:partner_commission.field_commission_transaction__payer_type
+msgid ""
+"account_id's scheme override if set, otherwise the agreement's default "
+"scheme."
+msgstr ""
+"переопределение схемы с account_id, если задано, иначе схема по умолчанию с "
+"соглашения."
+
+#. module: partner_commission
+#: model_terms:ir.ui.view,arch_db:partner_commission.commission_agreement_view_form
+msgid "e.g. ЖКУ 0.45%"
+msgstr "например, ЖКУ 0.45%"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__order_pinfo
+msgid "order_pinfo"
+msgstr "order_pinfo"
+
+#. module: partner_commission
+#. odoo-python
+#: code:addons/partner_commission/wizards/commission_transaction_import.py:0
+msgid ""
+"⚠ Warning: %(n)s of %(total)s imported rows look inconsistent with their "
+"resolved scheme. A non-zero 'Commission' in the registry usually means "
+"commission inside (partner pays), a zero 'Commission' means commission on "
+"top (client pays). Please double-check the 'Payer type' on the relevant "
+"agreement(s) or the 'Scheme override' on the relevant account(s)."
+msgstr ""
+"⚠ Внимание: %(n)s из %(total)s импортированных строк выглядят "
+"несоответствующими определённой для них схеме. Ненулевое 'Commission' в "
+"реестре обычно означает комиссию внутри (платит партнёр), нулевое "
+"'Commission' — комиссию сверху (платит клиент). Проверьте 'Плательщик "
+"комиссии' на соответствующих соглашениях или 'Переопределение схемы' на "
+"соответствующих аккаунтах."
