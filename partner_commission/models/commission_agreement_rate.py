@@ -25,12 +25,14 @@ class CommissionAgreementRate(models.Model):
     )
     nko_rate = fields.Float(
         string="NKO fee rate (%)",
+        digits=(16, 5),
         required=True,
         help="Processing fee rate charged by the settlement organization "
         "(NKO), as a percentage of the transaction amount.",
     )
     partner_rate = fields.Float(
         string="Partner commission rate (%)",
+        digits=(16, 5),
         required=True,
         help="Partner commission rate, as a percentage of the transaction "
         "amount.",

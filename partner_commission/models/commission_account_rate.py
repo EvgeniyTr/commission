@@ -29,12 +29,14 @@ class CommissionAccountRate(models.Model):
     )
     nko_rate = fields.Float(
         string="NKO fee rate (%)",
+        digits=(16, 5),
         required=True,
         help="Overrides the agreement's NKO fee rate for this account and "
         "payment method.",
     )
     partner_rate = fields.Float(
         string="Partner commission rate (%)",
+        digits=(16, 5),
         required=True,
         help="Overrides the agreement's partner commission rate for this "
         "account and payment method.",

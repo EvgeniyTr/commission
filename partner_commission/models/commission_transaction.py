@@ -124,7 +124,10 @@ class CommissionTransaction(models.Model):
     # Calculation block
     # ------------------------------------------------------------------
     nko_rate = fields.Float(
-        string="NKO fee rate (%)", compute="_compute_amounts", store=True
+        string="NKO fee rate (%)",
+        digits=(16, 5),
+        compute="_compute_amounts",
+        store=True,
     )
     nko_fee = fields.Monetary(
         string="NKO fee", compute="_compute_amounts", store=True
@@ -137,6 +140,7 @@ class CommissionTransaction(models.Model):
     )
     partner_rate = fields.Float(
         string="Partner commission rate (%)",
+        digits=(16, 5),
         compute="_compute_amounts",
         store=True,
     )
