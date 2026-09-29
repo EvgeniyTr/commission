@@ -81,12 +81,16 @@
                         <group>
                             <field name="total_amount" />
                             <field name="total_nko_fee" />
+                            <field name="total_nko_vat" />
                             <field name="total_partner_commission" />
+                            <field name="total_partner_commission_vat" />
                         </group>
                         <group string="Last calendar month">
                             <field name="total_amount_last_month" />
                             <field name="total_nko_fee_last_month" />
+                            <field name="total_nko_vat_last_month" />
                             <field name="total_partner_commission_last_month" />
+                            <field name="total_partner_commission_vat_last_month" />
                         </group>
                     </group>
                     <notebook>

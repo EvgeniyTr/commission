@@ -48,6 +48,8 @@
                             <field name="nko_fee_wo_vat" />
                             <field name="partner_rate" />
                             <field name="partner_commission" />
+                            <field name="partner_commission_vat" />
+                            <field name="partner_commission_wo_vat" />
                             <field name="client_pays" />
                             <field name="partner_receives" />
                         </group>

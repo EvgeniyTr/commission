@@ -94,7 +94,13 @@ class CommissionAgreement(models.Model):
     transaction_count = fields.Integer(compute="_compute_transaction_stats")
     total_amount = fields.Monetary(compute="_compute_transaction_stats")
     total_nko_fee = fields.Monetary(compute="_compute_transaction_stats")
+    total_nko_vat = fields.Monetary(
+        compute="_compute_transaction_stats", string="Total NKO Fee VAT"
+    )
     total_partner_commission = fields.Monetary(compute="_compute_transaction_stats")
+    total_partner_commission_vat = fields.Monetary(
+        compute="_compute_transaction_stats", string="Total Partner Commission VAT"
+    )
     total_amount_last_month = fields.Monetary(
         compute="_compute_transaction_stats",
         string="Total Amount (last month)",
@@ -104,9 +110,17 @@ class CommissionAgreement(models.Model):
     total_nko_fee_last_month = fields.Monetary(
         compute="_compute_transaction_stats", string="Total NKO Fee (last month)"
     )
+    total_nko_vat_last_month = fields.Monetary(
+        compute="_compute_transaction_stats",
+        string="Total NKO Fee VAT (last month)",
+    )
     total_partner_commission_last_month = fields.Monetary(
         compute="_compute_transaction_stats",
         string="Total Partner Commission (last month)",
+    )
+    total_partner_commission_vat_last_month = fields.Monetary(
+        compute="_compute_transaction_stats",
+        string="Total Partner Commission VAT (last month)",
     )
 
     @api.depends("account_ids")
@@ -117,7 +131,9 @@ class CommissionAgreement(models.Model):
     @api.depends(
         "transaction_ids.amount",
         "transaction_ids.nko_fee",
+        "transaction_ids.nko_vat",
         "transaction_ids.partner_commission",
+        "transaction_ids.partner_commission_vat",
         "transaction_ids.date",
     )
     def _compute_transaction_stats(self):
@@ -129,8 +145,12 @@ class CommissionAgreement(models.Model):
             agreement.transaction_count = len(transactions)
             agreement.total_amount = sum(transactions.mapped("amount"))
             agreement.total_nko_fee = sum(transactions.mapped("nko_fee"))
+            agreement.total_nko_vat = sum(transactions.mapped("nko_vat"))
             agreement.total_partner_commission = sum(
                 transactions.mapped("partner_commission")
+            )
+            agreement.total_partner_commission_vat = sum(
+                transactions.mapped("partner_commission_vat")
             )
 
             last_month_txns = transactions.filtered(
@@ -143,8 +163,14 @@ class CommissionAgreement(models.Model):
             agreement.total_nko_fee_last_month = sum(
                 last_month_txns.mapped("nko_fee")
             )
+            agreement.total_nko_vat_last_month = sum(
+                last_month_txns.mapped("nko_vat")
+            )
             agreement.total_partner_commission_last_month = sum(
                 last_month_txns.mapped("partner_commission")
+            )
+            agreement.total_partner_commission_vat_last_month = sum(
+                last_month_txns.mapped("partner_commission_vat")
             )
 
     def action_view_transactions(self):

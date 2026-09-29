@@ -147,6 +147,19 @@ class CommissionTransaction(models.Model):
     partner_commission = fields.Monetary(
         string="Partner commission", compute="_compute_amounts", store=True
     )
+    partner_commission_vat = fields.Monetary(
+        string="Partner commission VAT",
+        compute="_compute_amounts",
+        store=True,
+        help="VAT within the partner commission, using the agreement's "
+        "VAT rate (same rate as the NKO fee VAT) - not the raw registry "
+        "'Commission VAT' field.",
+    )
+    partner_commission_wo_vat = fields.Monetary(
+        string="Partner commission without VAT",
+        compute="_compute_amounts",
+        store=True,
+    )
     client_pays = fields.Monetary(
         string="Client pays", compute="_compute_amounts", store=True
     )
@@ -238,6 +251,20 @@ class CommissionTransaction(models.Model):
             rec.nko_fee_wo_vat = rec.nko_fee - nko_vat_raw
 
             rec.partner_commission = _round2(_pct_of(rec.amount, rec.partner_rate))
+
+            # Same VAT rate as the NKO fee above (including the SBP
+            # zeroing), applied to the partner commission instead.
+            partner_vat_exact = (
+                Decimal(str(rec.partner_commission))
+                * Decimal(str(vat_rate))
+                / (Decimal("100") + Decimal(str(vat_rate)))
+                if vat_rate
+                else Decimal("0")
+            )
+            rec.partner_commission_vat = _round2(partner_vat_exact)
+            rec.partner_commission_wo_vat = _round2(
+                Decimal(str(rec.partner_commission)) - partner_vat_exact
+            )
 
             # A specific account can override the agreement's default
             # scheme, for groups that mix both (e.g. most accounts pay

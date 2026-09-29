@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0-20260817\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-29 07:25+0000\n"
-"PO-Revision-Date: 2026-09-29 07:25+0000\n"
+"POT-Creation-Date: 2026-09-29 15:56+0000\n"
+"PO-Revision-Date: 2026-09-29 15:56+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -858,6 +858,11 @@ msgid "Partner commission"
 msgstr ""
 
 #. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__partner_commission_vat
+msgid "Partner commission VAT"
+msgstr ""
+
+#. module: partner_commission
 #: model:ir.model.fields,field_description:partner_commission.field_commission_account_rate__partner_rate
 #: model:ir.model.fields,field_description:partner_commission.field_commission_agreement_rate__partner_rate
 #: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__partner_rate
@@ -867,6 +872,11 @@ msgstr ""
 #. module: partner_commission
 #: model:ir.model.fields,help:partner_commission.field_commission_agreement_rate__partner_rate
 msgid "Partner commission rate, as a percentage of the transaction amount."
+msgstr ""
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__partner_commission_wo_vat
+msgid "Partner commission without VAT"
 msgstr ""
 
 #. module: partner_commission
@@ -1122,6 +1132,16 @@ msgid "Total NKO Fee (last month)"
 msgstr ""
 
 #. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_agreement__total_nko_vat
+msgid "Total NKO Fee VAT"
+msgstr ""
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_agreement__total_nko_vat_last_month
+msgid "Total NKO Fee VAT (last month)"
+msgstr ""
+
+#. module: partner_commission
 #: model:ir.model.fields,field_description:partner_commission.field_commission_agreement__total_nko_fee
 msgid "Total Nko Fee"
 msgstr ""
@@ -1134,6 +1154,16 @@ msgstr ""
 #. module: partner_commission
 #: model:ir.model.fields,field_description:partner_commission.field_commission_agreement__total_partner_commission_last_month
 msgid "Total Partner Commission (last month)"
+msgstr ""
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_agreement__total_partner_commission_vat
+msgid "Total Partner Commission VAT"
+msgstr ""
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_agreement__total_partner_commission_vat_last_month
+msgid "Total Partner Commission VAT (last month)"
 msgstr ""
 
 #. module: partner_commission
@@ -1226,6 +1256,13 @@ msgstr ""
 msgid ""
 "VAT rate used to split the processing fee (NKO fee) into its VAT and VAT-"
 "free parts."
+msgstr ""
+
+#. module: partner_commission
+#: model:ir.model.fields,help:partner_commission.field_commission_transaction__partner_commission_vat
+msgid ""
+"VAT within the partner commission, using the agreement's VAT rate (same rate"
+" as the NKO fee VAT) - not the raw registry 'Commission VAT' field."
 msgstr ""
 
 #. module: partner_commission

@@ -1360,3 +1360,43 @@ msgstr ""
 "'Commission' — комиссию сверху (платит клиент). Проверьте 'Плательщик "
 "комиссии' на соответствующих соглашениях или 'Переопределение схемы' на "
 "соответствующих аккаунтах."
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__partner_commission_vat
+msgid "Partner commission VAT"
+msgstr "НДС комиссии партнёра"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__partner_commission_wo_vat
+msgid "Partner commission without VAT"
+msgstr "Комиссия партнёра без НДС"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_agreement__total_nko_vat
+msgid "Total NKO Fee VAT"
+msgstr "Общий НДС вознаграждения НКО"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_agreement__total_nko_vat_last_month
+msgid "Total NKO Fee VAT (last month)"
+msgstr "Общий НДС вознаграждения НКО (за месяц)"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_agreement__total_partner_commission_vat
+msgid "Total Partner Commission VAT"
+msgstr "Общий НДС комиссии партнёра"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_agreement__total_partner_commission_vat_last_month
+msgid "Total Partner Commission VAT (last month)"
+msgstr "Общий НДС комиссии партнёра (за месяц)"
+
+#. module: partner_commission
+#: model:ir.model.fields,help:partner_commission.field_commission_transaction__partner_commission_vat
+msgid ""
+"VAT within the partner commission, using the agreement's VAT rate (same rate"
+" as the NKO fee VAT) - not the raw registry 'Commission VAT' field."
+msgstr ""
+"НДС в составе комиссии партнёра, по той же ставке НДС с соглашения, что и "
+"для вознаграждения НКО — не то же самое, что поле 'Commission VAT' из сырого"
+" реестра."
