@@ -14,12 +14,39 @@ services:
       timeout: 5s
       retries: 20
 
+  # One-shot: creates ODOO_DB and installs partner_commission if not
+  # already done, then exits. Runs once per `docker compose up` of the
+  # whole stack - NOT on every `restart odoo`, since restarting a single
+  # service doesn't re-run its dependencies. Keeping "-i" out of the
+  # long-running odoo service's own command (below) is deliberate: passing
+  # "-i" on every single boot/restart was observed to reset company
+  # settings (e.g. currency) that were configured after install - not the
+  # inert no-op it's normally assumed to be.
+  odoo-init:
+    image: odoo:18.0
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      HOST: db
+      USER: odoo
+      PASSWORD: odoo
+    volumes:
+      - odoo-web-data:/var/lib/odoo
+      - ./partner_commission:/mnt/extra-addons/partner_commission
+    command:
+      [
+        "-d", "${ODOO_DB:-commission_test}",
+        "-i", "partner_commission",
+        "--stop-after-init",
+      ]
+
   odoo:
     image: odoo:18.0
     restart: unless-stopped
     depends_on:
-      db:
-        condition: service_healthy
+      odoo-init:
+        condition: service_completed_successfully
     ports:
       - "8069:8069"
     environment:
@@ -33,15 +60,11 @@ services:
       # another machine is enough to run it.
       - ./partner_commission:/mnt/extra-addons/partner_commission
     command:
-      # -d/-i: creates ODOO_DB and installs partner_commission on first
-      # boot if not already done, then just keeps serving - "-i" on an
-      # already-installed module is a no-op, it never touches your data,
-      # so this is safe to run unchanged on every restart.
-      # --db-filter: hides the database picker/manager screen, since
-      # there's only ever one database in this setup.
+      # Deliberately no "-i" here - see odoo-init above. --db-filter hides
+      # the database picker/manager screen, since there's only ever one
+      # database in this setup.
       [
         "-d", "${ODOO_DB:-commission_test}",
-        "-i", "base,partner_commission",
         "--db-filter=^${ODOO_DB:-commission_test}$$",
       ]
 
