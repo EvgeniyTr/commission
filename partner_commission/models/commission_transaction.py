@@ -251,7 +251,11 @@ class CommissionTransaction(models.Model):
 
             rec.nko_fee = _round2(_pct_of(rec.amount, rec.nko_rate))
             vat_rate = rec.agreement_id.vat_rate or 0.0
-            if rec.pay_method == "sbp":
+            # SBP and its close relatives (T-Pay, Payout, Payout Faster
+            # Payment) settle as a bank transfer, not card acquiring, and
+            # are VAT-exempt the same way plain SBP is. AlfaPay/SberPay/
+            # INTCARD are not included here - VAT is calculated for them.
+            if rec.pay_method in ("sbp", "tpay", "payout", "payout_sbp"):
                 vat_rate = 0.0
             # Kept as plain float (not exact-decimal) on purpose: this is
             # what "NKO fee without VAT" is subtracted from below, at full
