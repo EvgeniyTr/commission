@@ -221,14 +221,19 @@ class CommissionTransactionImport(models.TransientModel):
             # registries a non-zero 'Commission' means the gateway
             # deducted the fee from the settlement (scheme: commission
             # inside), a zero 'Commission' means it didn't (scheme:
-            # commission on top).
+            # commission on top). Skipped entirely for 'mixed' - there the
+            # Commission field IS how the scheme is decided, so it can
+            # never be "inconsistent" with itself.
             expected_payer_type = (
                 account.payer_type_override if account else None
             ) or agreement.payer_type
-            is_nonzero_commission = abs(vals.get("gw_commission") or 0.0) > 0.01
-            expects_nonzero = expected_payer_type == "partner"
-            if is_nonzero_commission != expects_nonzero:
-                scheme_mismatch += 1
+            if expected_payer_type != "mixed":
+                is_nonzero_commission = (
+                    abs(vals.get("gw_commission") or 0.0) > 0.01
+                )
+                expects_nonzero = expected_payer_type == "partner"
+                if is_nonzero_commission != expects_nonzero:
+                    scheme_mismatch += 1
 
             to_create.append(vals)
 

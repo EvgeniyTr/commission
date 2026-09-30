@@ -234,6 +234,7 @@ class CommissionTransaction(models.Model):
     @api.depends(
         "amount",
         "pay_method",
+        "gw_commission",
         "account_id.payer_type_override",
         "account_id.rate_override_ids.nko_rate",
         "account_id.rate_override_ids.partner_rate",
@@ -292,10 +293,19 @@ class CommissionTransaction(models.Model):
             # A specific account can override the agreement's default
             # scheme, for groups that mix both (e.g. most accounts pay
             # "on top" but a handful are configured "inside").
-            rec.payer_type = (
+            scheme = (
                 rec.account_id.payer_type_override
                 or rec.agreement_id.payer_type
             )
+            if scheme == "mixed":
+                # Resolved per transaction from the registry's own
+                # 'Commission' field: the gateway only deducts a fee from
+                # the settlement (scheme: inside, partner pays) when it's
+                # non-zero; zero means nothing was deducted here (scheme:
+                # on top, client pays) - see the import wizard's
+                # plausibility check, which uses the same rule.
+                scheme = "partner" if rec.gw_commission > 0.01 else "client"
+            rec.payer_type = scheme
             if rec.payer_type == "client":
                 # Commission on top: the client pays amount + commission,
                 # the partner receives the full amount.

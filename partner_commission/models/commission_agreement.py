@@ -7,6 +7,7 @@ from odoo.exceptions import UserError
 PAYER_TYPE_SELECTION = [
     ("client", "Commission on top (paid by the client)"),
     ("partner", "Commission inside (paid by the partner)"),
+    ("mixed", "Mixed (auto-detect per transaction from Commission)"),
 ]
 
 
@@ -42,8 +43,13 @@ class CommissionAgreement(models.Model):
         "the commission; the partner receives the full amount.\n"
         "* Commission inside: the client pays only the transaction amount; "
         "the commission is deducted from what the partner receives.\n"
-        "A specific account can override this on the accounts directory "
-        "when a group mixes both schemes.",
+        "* Mixed: resolved per transaction from the registry's own "
+        "'Commission' field - non-zero means inside (partner pays), zero "
+        "means on top (client pays). Use this when a single group "
+        "genuinely mixes both schemes account by account and you don't "
+        "want to maintain per-account overrides by hand.\n"
+        "A specific account can also override this on the accounts "
+        "directory when only a few accounts differ from the rest.",
     )
     vat_rate = fields.Float(
         string="VAT rate on NKO fee (%)",

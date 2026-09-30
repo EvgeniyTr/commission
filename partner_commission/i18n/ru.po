@@ -1442,3 +1442,37 @@ msgstr "SberPay"
 #: model:ir.model.fields.selection,name:partner_commission.selection__commission_transaction__pay_method__tpay
 msgid "T-Pay"
 msgstr "T-Pay"
+
+#. module: partner_commission
+#: model:ir.model.fields,help:partner_commission.field_commission_account__payer_type_override
+msgid ""
+"Leave empty to use the agreement's default scheme. Set this to a fixed "
+"scheme, or to 'Mixed', only for the specific accounts that differ from the "
+"agreement's own default."
+msgstr ""
+"Оставьте пустым, чтобы использовать схему по умолчанию с соглашения. "
+"Задавайте конкретную схему или «Смешанный» только для тех аккаунтов, которые"
+" отличаются от схемы по умолчанию соглашения."
+
+#. module: partner_commission
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_account__effective_payer_type__mixed
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_account__payer_type_override__mixed
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_agreement__payer_type__mixed
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_transaction__payer_type__mixed
+msgid "Mixed (auto-detect per transaction from Commission)"
+msgstr "Смешанный (автоопределение по транзакции из Commission)"
+
+#. module: partner_commission
+#: model:ir.model.fields,help:partner_commission.field_commission_agreement__payer_type
+msgid ""
+"Who effectively bears the commission by default for accounts assigned to this agreement:\n"
+"* Commission on top: the client pays the transaction amount plus the commission; the partner receives the full amount.\n"
+"* Commission inside: the client pays only the transaction amount; the commission is deducted from what the partner receives.\n"
+"* Mixed: resolved per transaction from the registry's own 'Commission' field - non-zero means inside (partner pays), zero means on top (client pays). Use this when a single group genuinely mixes both schemes account by account and you don't want to maintain per-account overrides by hand.\n"
+"A specific account can also override this on the accounts directory when only a few accounts differ from the rest."
+msgstr ""
+"Кто по умолчанию фактически несёт комиссию для аккаунтов, назначенных на это соглашение:\n"
+"* Комиссия сверху: клиент платит сумму транзакции плюс комиссию; партнёр получает полную сумму.\n"
+"* Комиссия внутри: клиент платит только сумму транзакции; комиссия удерживается из суммы, которую получает партнёр.\n"
+"* Смешанный: определяется по каждой транзакции из поля 'Commission' самого реестра — ненулевое значение означает внутри (платит партнёр), нулевое — сверху (платит клиент). Используйте, когда в одной группе реально смешаны обе схемы по-разному для разных аккаунтов, и вы не хотите вручную поддерживать переопределения по каждому аккаунту.\n"
+"Конкретный аккаунт также может переопределить это в справочнике аккаунтов, если от общей схемы отличаются лишь немногие аккаунты."

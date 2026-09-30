@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0-20260817\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-29 16:04+0000\n"
-"PO-Revision-Date: 2026-09-29 16:04+0000\n"
+"POT-Creation-Date: 2026-09-30 07:04+0000\n"
+"PO-Revision-Date: 2026-09-30 07:04+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -680,8 +680,9 @@ msgstr ""
 #. module: partner_commission
 #: model:ir.model.fields,help:partner_commission.field_commission_account__payer_type_override
 msgid ""
-"Leave empty to use the agreement's default scheme. Set this only when a "
-"single account group mixes both schemes."
+"Leave empty to use the agreement's default scheme. Set this to a fixed "
+"scheme, or to 'Mixed', only for the specific accounts that differ from the "
+"agreement's own default."
 msgstr ""
 
 #. module: partner_commission
@@ -741,6 +742,14 @@ msgstr ""
 #. module: partner_commission
 #: model:ir.model.fields,field_description:partner_commission.field_commission_account__name
 msgid "Merchant name"
+msgstr ""
+
+#. module: partner_commission
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_account__effective_payer_type__mixed
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_account__payer_type_override__mixed
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_agreement__payer_type__mixed
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_transaction__payer_type__mixed
+msgid "Mixed (auto-detect per transaction from Commission)"
 msgstr ""
 
 #. module: partner_commission
@@ -1318,7 +1327,8 @@ msgid ""
 "Who effectively bears the commission by default for accounts assigned to this agreement:\n"
 "* Commission on top: the client pays the transaction amount plus the commission; the partner receives the full amount.\n"
 "* Commission inside: the client pays only the transaction amount; the commission is deducted from what the partner receives.\n"
-"A specific account can override this on the accounts directory when a group mixes both schemes."
+"* Mixed: resolved per transaction from the registry's own 'Commission' field - non-zero means inside (partner pays), zero means on top (client pays). Use this when a single group genuinely mixes both schemes account by account and you don't want to maintain per-account overrides by hand.\n"
+"A specific account can also override this on the accounts directory when only a few accounts differ from the rest."
 msgstr ""
 
 #. module: partner_commission

@@ -43,7 +43,8 @@ class CommissionAccount(models.Model):
         selection=PAYER_TYPE_SELECTION,
         string="Scheme override",
         help="Leave empty to use the agreement's default scheme. Set this "
-        "only when a single account group mixes both schemes.",
+        "to a fixed scheme, or to 'Mixed', only for the specific accounts "
+        "that differ from the agreement's own default.",
     )
     agreement_id = fields.Many2one(
         comodel_name="commission.agreement",
