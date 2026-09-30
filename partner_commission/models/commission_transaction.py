@@ -26,6 +26,35 @@ def _pct_of(base, rate_percent):
     return Decimal(str(base)) * Decimal(str(rate_percent)) / Decimal("100")
 
 
+def _effective_rate_commission(amount, commission_wo_vat, reduction_percent):
+    """Optional alternative partner-commission formula, enabled per
+    agreement (commission.agreement.use_rate_formula):
+
+        Cc = ROUND(commission_wo_vat * 100 / Amount, 2)
+        S = Amount * (Cc - Cs) / 100
+
+    Cc is the gateway's own actual effective net-of-VAT commission rate
+    for THIS transaction (from the raw registry 'Commission without VAT'
+    field), not our configured NKO rate - rounded to 2 decimals before
+    use, same as the legacy spreadsheet's own helper column for it. Cs
+    (reduction_percent) is a platform-kept margin set on the agreement
+    (per payment method).
+
+    Cc's rounding is not just cosmetic: it changes the result. An
+    unrounded Cc used to be algebraically cancelled out of this formula
+    (S = commission_wo_vat - Amount * Cs / 100) to sidestep a Decimal
+    precision issue on the division - but that shortcut is only
+    equivalent to THIS formula when Cc is left unrounded, which turned
+    out not to match the legacy spreadsheets after all: they round Cc
+    first, so the division must actually happen here."""
+    if not amount:
+        return Decimal("0")
+    cc = (Decimal(str(commission_wo_vat)) * Decimal("100") / Decimal(str(amount))).quantize(
+        Decimal("0.01"), rounding=ROUND_HALF_UP
+    )
+    return Decimal(str(amount)) * (cc - Decimal(str(reduction_percent))) / Decimal("100")
+
+
 class CommissionTransaction(models.Model):
     """One line of the transaction registry imported from the payment
     gateway, enriched with the partner commission calculation for its
@@ -235,13 +264,16 @@ class CommissionTransaction(models.Model):
         "amount",
         "pay_method",
         "gw_commission",
+        "gw_commission_wo_vat",
         "account_id.payer_type_override",
         "account_id.rate_override_ids.nko_rate",
         "account_id.rate_override_ids.partner_rate",
         "agreement_id.payer_type",
         "agreement_id.vat_rate",
+        "agreement_id.use_rate_formula",
         "agreement_id.rate_line_ids.nko_rate",
         "agreement_id.rate_line_ids.partner_rate",
+        "agreement_id.rate_line_ids.rate_formula_reduction",
     )
     def _compute_amounts(self):
         for rec in self:
@@ -278,7 +310,26 @@ class CommissionTransaction(models.Model):
             rec.nko_vat = _round2(nko_vat_exact)
             rec.nko_fee_wo_vat = rec.nko_fee - nko_vat_raw
 
-            rec.partner_commission = _round2(_pct_of(rec.amount, rec.partner_rate))
+            if rec.agreement_id.use_rate_formula:
+                agreement_rate_line = rec.agreement_id.rate_line_ids.filtered(
+                    lambda line: line.pay_method == rec.pay_method
+                )[:1]
+                reduction = (
+                    agreement_rate_line.rate_formula_reduction
+                    if agreement_rate_line
+                    else 0.0
+                )
+                rec.partner_commission = _round2(
+                    _effective_rate_commission(
+                        rec.amount,
+                        rec.gw_commission_wo_vat,
+                        reduction,
+                    )
+                )
+            else:
+                rec.partner_commission = _round2(
+                    _pct_of(rec.amount, rec.partner_rate)
+                )
 
             # Same VAT rate as the NKO fee above (including the SBP
             # zeroing), applied to the partner commission instead.

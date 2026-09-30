@@ -52,6 +52,15 @@ class CommissionAgreementRate(models.Model):
         help="Partner commission rate, as a percentage of the transaction "
         "amount.",
     )
+    rate_formula_reduction = fields.Float(
+        string="Reduction coefficient Cs (%)",
+        digits=(16, 5),
+        help="Only used when the agreement's 'Use effective-rate formula' "
+        "is enabled, instead of 'Partner commission rate (%)' above, for "
+        "this payment method: S = Commission without VAT - Amount * Cs / "
+        "100. Kept per payment method since the platform's margin can "
+        "differ by method.",
+    )
 
     _sql_constraints = [
         (

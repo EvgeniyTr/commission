@@ -1476,3 +1476,39 @@ msgstr ""
 "* Комиссия внутри: клиент платит только сумму транзакции; комиссия удерживается из суммы, которую получает партнёр.\n"
 "* Смешанный: определяется по каждой транзакции из поля 'Commission' самого реестра — ненулевое значение означает внутри (платит партнёр), нулевое — сверху (платит клиент). Используйте, когда в одной группе реально смешаны обе схемы по-разному для разных аккаунтов, и вы не хотите вручную поддерживать переопределения по каждому аккаунту.\n"
 "Конкретный аккаунт также может переопределить это в справочнике аккаунтов, если от общей схемы отличаются лишь немногие аккаунты."
+
+#. module: partner_commission
+#: model:ir.model.fields,help:partner_commission.field_commission_agreement__use_rate_formula
+msgid ""
+"Optional alternative way to compute the partner commission for every transaction on this agreement, instead of the fixed 'Partner commission rate (%)' by payment method:\n"
+"S = Amount * (Cc - Cs) / 100\n"
+"Cc = 'Commission without VAT' (the registry's own raw field) * 100 / Amount - i.e. the gateway's own actual effective net-of-VAT commission rate for that specific transaction, not our configured NKO rate.\n"
+"Cs = the reduction coefficient below, kept by the platform.\n"
+"NKO fee is not affected - only the partner commission."
+msgstr ""
+"Необязательный альтернативный способ расчёта комиссии партнёра для всех транзакций этого соглашения — вместо фиксированной «Ставки комиссии партнёра (%)» по способу оплаты:\n"
+"S = Amount * (Cc − Cs) / 100\n"
+"Cc = «Commission without VAT» (сырое поле из реестра) * 100 / Amount — то есть фактическая эффективная ставка НКО без НДС, которую шлюз применил именно к этой транзакции, а не наша настроенная ставка НКО.\n"
+"Cs = понижающий коэффициент ниже, который оставляет себе площадка.\n"
+"На вознаграждение НКО не влияет — только на комиссию партнёра."
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_agreement__rate_formula_reduction
+msgid "Reduction coefficient Cs (%)"
+msgstr "Понижающий коэффициент Cs (%)"
+
+#. module: partner_commission
+#: model:ir.model.fields,help:partner_commission.field_commission_agreement__rate_formula_reduction
+msgid ""
+"Subtracted from each transaction's own effective NKO rate (Cc) before "
+"multiplying by the amount. Only used when 'Use effective-rate formula' is "
+"enabled."
+msgstr ""
+"Вычитается из фактической ставки НКО транзакции (Cc) перед умножением на "
+"сумму. Используется, только если включена «Использовать формулу по "
+"эффективной ставке»."
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_agreement__use_rate_formula
+msgid "Use effective-rate formula"
+msgstr "Использовать формулу по эффективной ставке"

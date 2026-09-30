@@ -57,6 +57,20 @@ class CommissionAgreement(models.Model):
         help="VAT rate used to split the processing fee (NKO fee) into its "
         "VAT and VAT-free parts.",
     )
+    use_rate_formula = fields.Boolean(
+        string="Use effective-rate formula",
+        help="Optional alternative way to compute the partner commission "
+        "for every transaction on this agreement, instead of the fixed "
+        "'Partner commission rate (%)' by payment method:\n"
+        "S = Amount * (Cc - Cs) / 100\n"
+        "Cc = 'Commission without VAT' (the registry's own raw field) "
+        "* 100 / Amount - i.e. the gateway's own actual effective "
+        "net-of-VAT commission rate for that specific transaction, not "
+        "our configured NKO rate.\n"
+        "Cs = the reduction coefficient, set per payment method on the "
+        "'Rates by payment method' tab below.\n"
+        "NKO fee is not affected - only the partner commission.",
+    )
     currency_id = fields.Many2one(
         comodel_name="res.currency",
         string="Currency",

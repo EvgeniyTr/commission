@@ -6,11 +6,9 @@ import io
 
 from odoo import fields, models
 
-# Same column order/names as the legacy manual export ("Итог.csv"):
-# Стрим;PayMethod;Bank;IdAccount (head);IdAccount;Вознаграждение НКО;НДС;
-# Вознаграждение без НДС;Ставка вознаграждения НКО;Бонус ДМЛ;
-# Плательщик комиссии;Наименование контрагента;
-# Точка исключение (для пл ФЛ);Есть Услуги - исключения
+# Based on the legacy manual export ("Итог.csv") column order, with a
+# couple of columns renamed/added since (see LEGACY_HEADER below for the
+# authoritative current list - this comment is just for context).
 LEGACY_HEADER = [
     "Стрим",
     "PayMethod",
@@ -22,6 +20,7 @@ LEGACY_HEADER = [
     "Вознаграждение без НДС",
     "Ставка вознаграждения НКО",
     "Бонус Партнера",
+    "НДС Партнера",
     "Удержание коммиссии",
     "Наименование контрагента",
     "Точка исключение (для пл ФЛ)",
@@ -168,6 +167,7 @@ class CommissionTransactionExport(models.TransientModel):
                 _num(txn.nko_fee_wo_vat),
                 _num(txn.nko_rate / 100.0),
                 _num(txn.partner_commission),
+                _num(txn.partner_commission_vat),
                 PAYER_TYPE_RU.get(txn.payer_type, ""),
                 txn.company_name or "",
                 ", ".join(exclusion_points),

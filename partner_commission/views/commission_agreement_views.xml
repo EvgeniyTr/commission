@@ -76,6 +76,7 @@
                             <field name="payer_type" />
                             <field name="vat_rate" />
                             <field name="currency_id" />
+                            <field name="use_rate_formula" />
                             <field name="active" invisible="1" />
                         </group>
                         <group>
@@ -100,6 +101,10 @@
                                     <field name="pay_method" />
                                     <field name="nko_rate" />
                                     <field name="partner_rate" />
+                                    <field
+                                        name="rate_formula_reduction"
+                                        invisible="not parent.use_rate_formula"
+                                    />
                                 </list>
                             </field>
                         </page>

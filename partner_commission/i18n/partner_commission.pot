@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0-20260817\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-30 07:04+0000\n"
-"PO-Revision-Date: 2026-09-30 07:04+0000\n"
+"POT-Creation-Date: 2026-09-30 09:41+0000\n"
+"PO-Revision-Date: 2026-09-30 09:41+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -809,6 +809,16 @@ msgid "OGRN"
 msgstr ""
 
 #. module: partner_commission
+#: model:ir.model.fields,help:partner_commission.field_commission_agreement__use_rate_formula
+msgid ""
+"Optional alternative way to compute the partner commission for every transaction on this agreement, instead of the fixed 'Partner commission rate (%)' by payment method:\n"
+"S = Amount * (Cc - Cs) / 100\n"
+"Cc = 'Commission without VAT' (the registry's own raw field) * 100 / Amount - i.e. the gateway's own actual effective net-of-VAT commission rate for that specific transaction, not our configured NKO rate.\n"
+"Cs = the reduction coefficient below, kept by the platform.\n"
+"NKO fee is not affected - only the partner commission."
+msgstr ""
+
+#. module: partner_commission
 #: model:ir.model.fields,help:partner_commission.field_commission_account__rate_override_ids
 msgid ""
 "Optional per-account rate, by payment method. If there is no override row "
@@ -1005,6 +1015,11 @@ msgid "Recompute transactions"
 msgstr ""
 
 #. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_agreement__rate_formula_reduction
+msgid "Reduction coefficient Cs (%)"
+msgstr ""
+
+#. module: partner_commission
 #: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__ref_no
 msgid "RefNo"
 msgstr ""
@@ -1087,6 +1102,14 @@ msgstr ""
 #: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__status
 #: model_terms:ir.ui.view,arch_db:partner_commission.commission_transaction_view_search
 msgid "Status"
+msgstr ""
+
+#. module: partner_commission
+#: model:ir.model.fields,help:partner_commission.field_commission_agreement__rate_formula_reduction
+msgid ""
+"Subtracted from each transaction's own effective NKO rate (Cc) before "
+"multiplying by the amount. Only used when 'Use effective-rate formula' is "
+"enabled."
 msgstr ""
 
 #. module: partner_commission
@@ -1277,6 +1300,11 @@ msgstr ""
 msgid ""
 "Use \"Import Accounts Directory\" to load the gateway's\n"
 "                accounts export first."
+msgstr ""
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_agreement__use_rate_formula
+msgid "Use effective-rate formula"
 msgstr ""
 
 #. module: partner_commission
