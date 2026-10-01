@@ -1047,7 +1047,7 @@ msgstr "Количество строк"
 #: model:ir.model.fields.selection,name:partner_commission.selection__commission_agreement_rate__pay_method__sbp
 #: model:ir.model.fields.selection,name:partner_commission.selection__commission_transaction__pay_method__sbp
 msgid "SBP (Faster Payments)"
-msgstr "СБП (быстрые платежи)"
+msgstr "СБП"
 
 #. module: partner_commission
 #: model_terms:ir.ui.view,arch_db:partner_commission.commission_agreement_view_search

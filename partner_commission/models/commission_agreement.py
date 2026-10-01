@@ -203,17 +203,27 @@ class CommissionAgreement(models.Model):
         return action
 
     def action_view_accounts(self):
-        """Browse every account of this agreement's group (assigned here,
-        assigned elsewhere, unassigned, or excluded) so the user can triage
-        them: assign to an agreement, override the scheme, or exclude."""
+        """Browse this agreement's own assigned accounts, plus - since a
+        group can be split across several agreements - the group's
+        excluded accounts, so the user can see the full picture for this
+        agreement: what it counts and what is deliberately excluded
+        around it. Deliberately does NOT include accounts assigned to a
+        sibling agreement (unless excluded): showing those here would
+        make 'excluded' look shared between agreements, when editing it
+        from this list really means "for whichever agreement this
+        particular account belongs to"."""
         self.ensure_one()
         action = self.env["ir.actions.act_window"]._for_xml_id(
             "partner_commission.action_commission_account"
         )
+        domain = [("agreement_id", "=", self.id)]
         if self.group_id:
-            action["domain"] = [("group_id", "=", self.group_id.id)]
-        else:
-            action["domain"] = [("agreement_id", "=", self.id)]
+            domain = ["|"] + domain + [
+                "&",
+                ("group_id", "=", self.group_id.id),
+                ("excluded", "=", True),
+            ]
+        action["domain"] = domain
         action["context"] = {
             "default_group_id": self.group_id.id,
             "default_agreement_id": self.id,
