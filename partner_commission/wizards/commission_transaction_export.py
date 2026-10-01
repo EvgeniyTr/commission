@@ -177,7 +177,7 @@ class CommissionTransactionExport(models.TransientModel):
                 row.extend(self._get_registry_row(txn))
             writer.writerow(row)
 
-        content = buffer.getvalue().encode("utf-8")
+        content = buffer.getvalue().encode("cp1251", errors="replace")
         self.write(
             {
                 "state": "done",
