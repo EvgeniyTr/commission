@@ -4,3 +4,4 @@ from . import commission_account_group
 from . import commission_account
 from . import commission_account_rate
 from . import commission_transaction
+from . import res_company

@@ -101,6 +101,7 @@
                                     <field name="pay_method" />
                                     <field name="nko_rate" />
                                     <field name="partner_rate" />
+                                    <field name="nko_vat_exempt" />
                                     <field
                                         name="rate_formula_reduction"
                                         invisible="not parent.use_rate_formula"

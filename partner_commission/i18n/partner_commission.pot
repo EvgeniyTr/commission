@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0-20260817\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-30 09:41+0000\n"
-"PO-Revision-Date: 2026-09-30 09:41+0000\n"
+"POT-Creation-Date: 2026-11-02 08:53+0000\n"
+"PO-Revision-Date: 2026-11-02 08:53+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -295,6 +295,11 @@ msgstr ""
 #. module: partner_commission
 #: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__gw_commission_wo_vat
 msgid "Commission without VAT"
+msgstr ""
+
+#. module: partner_commission
+#: model:ir.model,name:partner_commission.model_res_company
+msgid "Companies"
 msgstr ""
 
 #. module: partner_commission
@@ -764,6 +769,11 @@ msgid "NKO fee VAT"
 msgstr ""
 
 #. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_res_company__partner_commission_nko_vat_rate
+msgid "NKO fee VAT rate (%)"
+msgstr ""
+
+#. module: partner_commission
 #: model:ir.model.fields,field_description:partner_commission.field_commission_account_rate__nko_rate
 #: model:ir.model.fields,field_description:partner_commission.field_commission_agreement_rate__nko_rate
 #: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__nko_rate
@@ -809,12 +819,21 @@ msgid "OGRN"
 msgstr ""
 
 #. module: partner_commission
+#: model:ir.model.fields,help:partner_commission.field_commission_agreement_rate__rate_formula_reduction
+msgid ""
+"Only used when the agreement's 'Use effective-rate formula' is enabled, "
+"instead of 'Partner commission rate (%)' above, for this payment method: S ="
+" Commission without VAT - Amount * Cs / 100. Kept per payment method since "
+"the platform's margin can differ by method."
+msgstr ""
+
+#. module: partner_commission
 #: model:ir.model.fields,help:partner_commission.field_commission_agreement__use_rate_formula
 msgid ""
 "Optional alternative way to compute the partner commission for every transaction on this agreement, instead of the fixed 'Partner commission rate (%)' by payment method:\n"
 "S = Amount * (Cc - Cs) / 100\n"
 "Cc = 'Commission without VAT' (the registry's own raw field) * 100 / Amount - i.e. the gateway's own actual effective net-of-VAT commission rate for that specific transaction, not our configured NKO rate.\n"
-"Cs = the reduction coefficient below, kept by the platform.\n"
+"Cs = the reduction coefficient, set per payment method on the 'Rates by payment method' tab below.\n"
 "NKO fee is not affected - only the partner commission."
 msgstr ""
 
@@ -1015,7 +1034,7 @@ msgid "Recompute transactions"
 msgstr ""
 
 #. module: partner_commission
-#: model:ir.model.fields,field_description:partner_commission.field_commission_agreement__rate_formula_reduction
+#: model:ir.model.fields,field_description:partner_commission.field_commission_agreement_rate__rate_formula_reduction
 msgid "Reduction coefficient Cs (%)"
 msgstr ""
 
@@ -1102,14 +1121,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__status
 #: model_terms:ir.ui.view,arch_db:partner_commission.commission_transaction_view_search
 msgid "Status"
-msgstr ""
-
-#. module: partner_commission
-#: model:ir.model.fields,help:partner_commission.field_commission_agreement__rate_formula_reduction
-msgid ""
-"Subtracted from each transaction's own effective NKO rate (Cc) before "
-"multiplying by the amount. Only used when 'Use effective-rate formula' is "
-"enabled."
 msgstr ""
 
 #. module: partner_commission
@@ -1327,21 +1338,31 @@ msgstr ""
 
 #. module: partner_commission
 #: model:ir.model.fields,field_description:partner_commission.field_commission_agreement__vat_rate
-msgid "VAT rate on NKO fee (%)"
+msgid "VAT rate on partner reward (%)"
 msgstr ""
 
 #. module: partner_commission
 #: model:ir.model.fields,help:partner_commission.field_commission_agreement__vat_rate
 msgid ""
+"VAT rate used to split the partner's reward (commission) into its VAT and "
+"VAT-free parts. Set 0 for a partner on the simplified tax system (no VAT). "
+"The NKO fee's VAT rate is a single company-wide setting instead."
+msgstr ""
+
+#. module: partner_commission
+#: model:ir.model.fields,help:partner_commission.field_res_company__partner_commission_nko_vat_rate
+msgid ""
 "VAT rate used to split the processing fee (NKO fee) into its VAT and VAT-"
-"free parts."
+"free parts. One value for all commission agreements. The VAT on the "
+"partner's own reward is set per agreement instead (e.g. 0 for a partner on "
+"the simplified tax system)."
 msgstr ""
 
 #. module: partner_commission
 #: model:ir.model.fields,help:partner_commission.field_commission_transaction__partner_commission_vat
 msgid ""
-"VAT within the partner commission, using the agreement's VAT rate (same rate"
-" as the NKO fee VAT) - not the raw registry 'Commission VAT' field."
+"VAT within the partner commission, using the agreement's 'VAT rate on "
+"partner reward' - not the raw registry 'Commission VAT' field."
 msgstr ""
 
 #. module: partner_commission

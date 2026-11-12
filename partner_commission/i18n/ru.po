@@ -1,6 +1,3 @@
-# Translation of Odoo Server.
-# This file contains the translation of the following modules:
-# 	* partner_commission
 #
 msgid ""
 msgstr ""
@@ -112,6 +109,13 @@ msgstr "Соглашение"
 #: model:ir.ui.menu,name:partner_commission.menu_commission_agreement
 msgid "Agreements"
 msgstr "Соглашения"
+
+#. module: partner_commission
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_account_rate__pay_method__alfapay
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_agreement_rate__pay_method__alfapay
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_transaction__pay_method__alfapay
+msgid "AlfaPay"
+msgstr "AlfaPay"
 
 #. module: partner_commission
 #: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__amount
@@ -306,6 +310,11 @@ msgstr "Комиссия сверху (платит клиент)"
 #: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__gw_commission_wo_vat
 msgid "Commission without VAT"
 msgstr "Commission without VAT"
+
+#. module: partner_commission
+#: model:ir.model,name:partner_commission.model_res_company
+msgid "Companies"
+msgstr ""
 
 #. module: partner_commission
 #: model:ir.model.fields,field_description:partner_commission.field_commission_agreement__company_id
@@ -588,6 +597,13 @@ msgid "INN"
 msgstr "ИНН"
 
 #. module: partner_commission
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_account_rate__pay_method__intcard
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_agreement_rate__pay_method__intcard
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_transaction__pay_method__intcard
+msgid "INTCARD (international card)"
+msgstr "INTCARD (международная карта)"
+
+#. module: partner_commission
 #: model:ir.model.fields,field_description:partner_commission.field_commission_account__acc_id
 #: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__id_account
 msgid "Id Account"
@@ -701,11 +717,13 @@ msgstr "Оставьте пустым, чтобы выгрузить все со
 #. module: partner_commission
 #: model:ir.model.fields,help:partner_commission.field_commission_account__payer_type_override
 msgid ""
-"Leave empty to use the agreement's default scheme. Set this only when a "
-"single account group mixes both schemes."
+"Leave empty to use the agreement's default scheme. Set this to a fixed "
+"scheme, or to 'Mixed', only for the specific accounts that differ from the "
+"agreement's own default."
 msgstr ""
 "Оставьте пустым, чтобы использовать схему по умолчанию с соглашения. "
-"Задавайте только если в одной группе аккаунтов смешаны обе схемы."
+"Задавайте конкретную схему или «Смешанный» только для тех аккаунтов, которые"
+" отличаются от схемы по умолчанию соглашения."
 
 #. module: partner_commission
 #: model_terms:ir.ui.view,arch_db:partner_commission.commission_transaction_export_view_form
@@ -771,6 +789,14 @@ msgid "Merchant name"
 msgstr "Название мерчанта"
 
 #. module: partner_commission
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_account__effective_payer_type__mixed
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_account__payer_type_override__mixed
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_agreement__payer_type__mixed
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_transaction__payer_type__mixed
+msgid "Mixed (auto-detect per transaction from Commission)"
+msgstr "Смешанный (автоопределение по транзакции из Commission)"
+
+#. module: partner_commission
 #: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__nko_fee
 #: model_terms:ir.ui.view,arch_db:partner_commission.commission_transaction_view_list
 msgid "NKO fee"
@@ -780,6 +806,11 @@ msgstr "Вознаграждение НКО"
 #: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__nko_vat
 msgid "NKO fee VAT"
 msgstr "НДС вознаграждения НКО"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_res_company__partner_commission_nko_vat_rate
+msgid "NKO fee VAT rate (%)"
+msgstr "Ставка НДС на вознаграждение НКО (%)"
 
 #. module: partner_commission
 #: model:ir.model.fields,field_description:partner_commission.field_commission_account_rate__nko_rate
@@ -825,6 +856,25 @@ msgstr "Заметки"
 #: model:ir.model.fields,field_description:partner_commission.field_commission_account__ogrn
 msgid "OGRN"
 msgstr "ОГРН"
+
+#. module: partner_commission
+#: model:ir.model.fields,help:partner_commission.field_commission_agreement_rate__rate_formula_reduction
+msgid ""
+"Only used when the agreement's 'Use effective-rate formula' is enabled, "
+"instead of 'Partner commission rate (%)' above, for this payment method: S ="
+" Commission without VAT - Amount * Cs / 100. Kept per payment method since "
+"the platform's margin can differ by method."
+msgstr ""
+
+#. module: partner_commission
+#: model:ir.model.fields,help:partner_commission.field_commission_agreement__use_rate_formula
+msgid ""
+"Optional alternative way to compute the partner commission for every transaction on this agreement, instead of the fixed 'Partner commission rate (%)' by payment method:\n"
+"S = Amount * (Cc - Cs) / 100\n"
+"Cc = 'Commission without VAT' (the registry's own raw field) * 100 / Amount - i.e. the gateway's own actual effective net-of-VAT commission rate for that specific transaction, not our configured NKO rate.\n"
+"Cs = the reduction coefficient, set per payment method on the 'Rates by payment method' tab below.\n"
+"NKO fee is not affected - only the partner commission."
+msgstr ""
 
 #. module: partner_commission
 #: model:ir.model.fields,help:partner_commission.field_commission_account__rate_override_ids
@@ -909,6 +959,11 @@ msgid "Partner commission"
 msgstr "Комиссия партнёра"
 
 #. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__partner_commission_vat
+msgid "Partner commission VAT"
+msgstr "НДС комиссии партнёра"
+
+#. module: partner_commission
 #: model:ir.model.fields,field_description:partner_commission.field_commission_account_rate__partner_rate
 #: model:ir.model.fields,field_description:partner_commission.field_commission_agreement_rate__partner_rate
 #: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__partner_rate
@@ -919,6 +974,11 @@ msgstr "Ставка комиссии партнёра (%)"
 #: model:ir.model.fields,help:partner_commission.field_commission_agreement_rate__partner_rate
 msgid "Partner commission rate, as a percentage of the transaction amount."
 msgstr "Ставка комиссии партнёра, в процентах от суммы транзакции."
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__partner_commission_wo_vat
+msgid "Partner commission without VAT"
+msgstr "Комиссия партнёра без НДС"
 
 #. module: partner_commission
 #: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__partner_receives
@@ -959,6 +1019,20 @@ msgstr "Группа аккаунтов платёжного шлюза (Company
 #: model_terms:ir.ui.view,arch_db:partner_commission.commission_transaction_view_search
 msgid "Payment method"
 msgstr "Способ оплаты"
+
+#. module: partner_commission
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_account_rate__pay_method__payout
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_agreement_rate__pay_method__payout
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_transaction__pay_method__payout
+msgid "Payout"
+msgstr "Payout"
+
+#. module: partner_commission
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_account_rate__pay_method__payout_sbp
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_agreement_rate__pay_method__payout_sbp
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_transaction__pay_method__payout_sbp
+msgid "Payout Faster Payment"
+msgstr "Payout (СБП)"
 
 #. module: partner_commission
 #. odoo-python
@@ -1011,6 +1085,11 @@ msgid "Recompute transactions"
 msgstr "Пересчитать транзакции"
 
 #. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_agreement_rate__rate_formula_reduction
+msgid "Reduction coefficient Cs (%)"
+msgstr "Понижающий коэффициент Cs (%)"
+
+#. module: partner_commission
 #: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__ref_no
 msgid "RefNo"
 msgstr "RefNo"
@@ -1048,6 +1127,13 @@ msgstr "Количество строк"
 #: model:ir.model.fields.selection,name:partner_commission.selection__commission_transaction__pay_method__sbp
 msgid "SBP (Faster Payments)"
 msgstr "СБП"
+
+#. module: partner_commission
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_account_rate__pay_method__sberpay
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_agreement_rate__pay_method__sberpay
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_transaction__pay_method__sberpay
+msgid "SberPay"
+msgstr "SberPay"
 
 #. module: partner_commission
 #: model_terms:ir.ui.view,arch_db:partner_commission.commission_agreement_view_search
@@ -1096,6 +1182,13 @@ msgid ""
 msgstr ""
 "Сумма за предыдущий полный календарный месяц (например, весь август, если "
 "сегодня сентябрь)."
+
+#. module: partner_commission
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_account_rate__pay_method__tpay
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_agreement_rate__pay_method__tpay
+#: model:ir.model.fields.selection,name:partner_commission.selection__commission_transaction__pay_method__tpay
+msgid "T-Pay"
+msgstr "T-Pay"
 
 #. module: partner_commission
 #: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__terminal
@@ -1191,6 +1284,16 @@ msgid "Total NKO Fee (last month)"
 msgstr "Общее вознаграждение НКО (за месяц)"
 
 #. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_agreement__total_nko_vat
+msgid "Total NKO Fee VAT"
+msgstr "Общий НДС вознаграждения НКО"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_agreement__total_nko_vat_last_month
+msgid "Total NKO Fee VAT (last month)"
+msgstr "Общий НДС вознаграждения НКО (за месяц)"
+
+#. module: partner_commission
 #: model:ir.model.fields,field_description:partner_commission.field_commission_agreement__total_nko_fee
 msgid "Total Nko Fee"
 msgstr "Общее вознаграждение НКО"
@@ -1204,6 +1307,16 @@ msgstr "Общая комиссия партнёра"
 #: model:ir.model.fields,field_description:partner_commission.field_commission_agreement__total_partner_commission_last_month
 msgid "Total Partner Commission (last month)"
 msgstr "Общая комиссия партнёра (за месяц)"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_agreement__total_partner_commission_vat
+msgid "Total Partner Commission VAT"
+msgstr "Общий НДС комиссии партнёра"
+
+#. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_agreement__total_partner_commission_vat_last_month
+msgid "Total Partner Commission VAT (last month)"
+msgstr "Общий НДС комиссии партнёра (за месяц)"
 
 #. module: partner_commission
 #: model_terms:ir.ui.view,arch_db:partner_commission.commission_agreement_view_list
@@ -1272,6 +1385,11 @@ msgstr ""
 "                аккаунтов»."
 
 #. module: partner_commission
+#: model:ir.model.fields,field_description:partner_commission.field_commission_agreement__use_rate_formula
+msgid "Use effective-rate formula"
+msgstr "Использовать формулу по эффективной ставке"
+
+#. module: partner_commission
 #: model:ir.model.fields,help:partner_commission.field_commission_transaction_import__agreement_id
 msgid ""
 "Used only for rows whose 'Id Account' is not found in the accounts "
@@ -1295,17 +1413,41 @@ msgstr "Обычно берётся из названия головного а�
 
 #. module: partner_commission
 #: model:ir.model.fields,field_description:partner_commission.field_commission_agreement__vat_rate
-msgid "VAT rate on NKO fee (%)"
-msgstr "Ставка НДС на вознаграждение НКО (%)"
+msgid "VAT rate on partner reward (%)"
+msgstr "Ставка НДС на вознаграждение Партнера (%)"
 
 #. module: partner_commission
 #: model:ir.model.fields,help:partner_commission.field_commission_agreement__vat_rate
 msgid ""
-"VAT rate used to split the processing fee (NKO fee) into its VAT and VAT-"
-"free parts."
+"VAT rate used to split the partner's reward (commission) into its VAT and "
+"VAT-free parts. Set 0 for a partner on the simplified tax system (no VAT). "
+"The NKO fee's VAT rate is a single company-wide setting instead."
 msgstr ""
-"Ставка НДС, используемая для разделения комиссии за обработку "
-"(вознаграждения НКО) на НДС и сумму без НДС."
+"Ставка НДС для разделения вознаграждения (комиссии) партнёра на НДС и сумму "
+"без НДС. Для партнёра на упрощённой системе налогообложения укажите 0 (без "
+"НДС). Ставка НДС для вознаграждения НКО задаётся одна на всю компанию."
+
+#. module: partner_commission
+#: model:ir.model.fields,help:partner_commission.field_res_company__partner_commission_nko_vat_rate
+msgid ""
+"VAT rate used to split the processing fee (NKO fee) into its VAT and VAT-"
+"free parts. One value for all commission agreements. The VAT on the "
+"partner's own reward is set per agreement instead (e.g. 0 for a partner on "
+"the simplified tax system)."
+msgstr ""
+"Ставка НДС для разделения вознаграждения НКО на НДС и сумму без НДС. Одно "
+"значение для всех соглашений. НДС на вознаграждение самого партнёра задаётся"
+" в соглашении (например, 0 для партнёра на упрощённой системе "
+"налогообложения)."
+
+#. module: partner_commission
+#: model:ir.model.fields,help:partner_commission.field_commission_transaction__partner_commission_vat
+msgid ""
+"VAT within the partner commission, using the agreement's 'VAT rate on "
+"partner reward' - not the raw registry 'Commission VAT' field."
+msgstr ""
+"НДС в составе комиссии партнёра по «Ставке НДС на вознаграждение Партнера» "
+"из соглашения — не то же самое, что поле 'Commission VAT' из сырого реестра."
 
 #. module: partner_commission
 #: model_terms:ir.ui.view,arch_db:partner_commission.commission_transaction_import_view_form
@@ -1318,12 +1460,14 @@ msgid ""
 "Who effectively bears the commission by default for accounts assigned to this agreement:\n"
 "* Commission on top: the client pays the transaction amount plus the commission; the partner receives the full amount.\n"
 "* Commission inside: the client pays only the transaction amount; the commission is deducted from what the partner receives.\n"
-"A specific account can override this on the accounts directory when a group mixes both schemes."
+"* Mixed: resolved per transaction from the registry's own 'Commission' field - non-zero means inside (partner pays), zero means on top (client pays). Use this when a single group genuinely mixes both schemes account by account and you don't want to maintain per-account overrides by hand.\n"
+"A specific account can also override this on the accounts directory when only a few accounts differ from the rest."
 msgstr ""
 "Кто по умолчанию фактически несёт комиссию для аккаунтов, назначенных на это соглашение:\n"
 "* Комиссия сверху: клиент платит сумму транзакции плюс комиссию; партнёр получает полную сумму.\n"
 "* Комиссия внутри: клиент платит только сумму транзакции; комиссия удерживается из суммы, которую получает партнёр.\n"
-"Конкретный аккаунт может переопределить это в справочнике аккаунтов, если в группе смешаны обе схемы."
+"* Смешанный: определяется по каждой транзакции из поля 'Commission' самого реестра — ненулевое значение означает внутри (платит партнёр), нулевое — сверху (платит клиент). Используйте, когда в одной группе реально смешаны обе схемы по-разному для разных аккаунтов, и вы не хотите вручную поддерживать переопределения по каждому аккаунту.\n"
+"Конкретный аккаунт также может переопределить это в справочнике аккаунтов, если от общей схемы отличаются лишь немногие аккаунты."
 
 #. module: partner_commission
 #: model:ir.model.fields,help:partner_commission.field_commission_transaction__payer_type
@@ -1360,155 +1504,3 @@ msgstr ""
 "'Commission' — комиссию сверху (платит клиент). Проверьте 'Плательщик "
 "комиссии' на соответствующих соглашениях или 'Переопределение схемы' на "
 "соответствующих аккаунтах."
-
-#. module: partner_commission
-#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__partner_commission_vat
-msgid "Partner commission VAT"
-msgstr "НДС комиссии партнёра"
-
-#. module: partner_commission
-#: model:ir.model.fields,field_description:partner_commission.field_commission_transaction__partner_commission_wo_vat
-msgid "Partner commission without VAT"
-msgstr "Комиссия партнёра без НДС"
-
-#. module: partner_commission
-#: model:ir.model.fields,field_description:partner_commission.field_commission_agreement__total_nko_vat
-msgid "Total NKO Fee VAT"
-msgstr "Общий НДС вознаграждения НКО"
-
-#. module: partner_commission
-#: model:ir.model.fields,field_description:partner_commission.field_commission_agreement__total_nko_vat_last_month
-msgid "Total NKO Fee VAT (last month)"
-msgstr "Общий НДС вознаграждения НКО (за месяц)"
-
-#. module: partner_commission
-#: model:ir.model.fields,field_description:partner_commission.field_commission_agreement__total_partner_commission_vat
-msgid "Total Partner Commission VAT"
-msgstr "Общий НДС комиссии партнёра"
-
-#. module: partner_commission
-#: model:ir.model.fields,field_description:partner_commission.field_commission_agreement__total_partner_commission_vat_last_month
-msgid "Total Partner Commission VAT (last month)"
-msgstr "Общий НДС комиссии партнёра (за месяц)"
-
-#. module: partner_commission
-#: model:ir.model.fields,help:partner_commission.field_commission_transaction__partner_commission_vat
-msgid ""
-"VAT within the partner commission, using the agreement's VAT rate (same rate"
-" as the NKO fee VAT) - not the raw registry 'Commission VAT' field."
-msgstr ""
-"НДС в составе комиссии партнёра, по той же ставке НДС с соглашения, что и "
-"для вознаграждения НКО — не то же самое, что поле 'Commission VAT' из сырого"
-" реестра."
-
-#. module: partner_commission
-#: model:ir.model.fields.selection,name:partner_commission.selection__commission_account_rate__pay_method__alfapay
-#: model:ir.model.fields.selection,name:partner_commission.selection__commission_agreement_rate__pay_method__alfapay
-#: model:ir.model.fields.selection,name:partner_commission.selection__commission_transaction__pay_method__alfapay
-msgid "AlfaPay"
-msgstr "AlfaPay"
-
-#. module: partner_commission
-#: model:ir.model.fields.selection,name:partner_commission.selection__commission_account_rate__pay_method__intcard
-#: model:ir.model.fields.selection,name:partner_commission.selection__commission_agreement_rate__pay_method__intcard
-#: model:ir.model.fields.selection,name:partner_commission.selection__commission_transaction__pay_method__intcard
-msgid "INTCARD (international card)"
-msgstr "INTCARD (международная карта)"
-
-#. module: partner_commission
-#: model:ir.model.fields.selection,name:partner_commission.selection__commission_account_rate__pay_method__payout
-#: model:ir.model.fields.selection,name:partner_commission.selection__commission_agreement_rate__pay_method__payout
-#: model:ir.model.fields.selection,name:partner_commission.selection__commission_transaction__pay_method__payout
-msgid "Payout"
-msgstr "Payout"
-
-#. module: partner_commission
-#: model:ir.model.fields.selection,name:partner_commission.selection__commission_account_rate__pay_method__payout_sbp
-#: model:ir.model.fields.selection,name:partner_commission.selection__commission_agreement_rate__pay_method__payout_sbp
-#: model:ir.model.fields.selection,name:partner_commission.selection__commission_transaction__pay_method__payout_sbp
-msgid "Payout Faster Payment"
-msgstr "Payout (СБП)"
-
-#. module: partner_commission
-#: model:ir.model.fields.selection,name:partner_commission.selection__commission_account_rate__pay_method__sberpay
-#: model:ir.model.fields.selection,name:partner_commission.selection__commission_agreement_rate__pay_method__sberpay
-#: model:ir.model.fields.selection,name:partner_commission.selection__commission_transaction__pay_method__sberpay
-msgid "SberPay"
-msgstr "SberPay"
-
-#. module: partner_commission
-#: model:ir.model.fields.selection,name:partner_commission.selection__commission_account_rate__pay_method__tpay
-#: model:ir.model.fields.selection,name:partner_commission.selection__commission_agreement_rate__pay_method__tpay
-#: model:ir.model.fields.selection,name:partner_commission.selection__commission_transaction__pay_method__tpay
-msgid "T-Pay"
-msgstr "T-Pay"
-
-#. module: partner_commission
-#: model:ir.model.fields,help:partner_commission.field_commission_account__payer_type_override
-msgid ""
-"Leave empty to use the agreement's default scheme. Set this to a fixed "
-"scheme, or to 'Mixed', only for the specific accounts that differ from the "
-"agreement's own default."
-msgstr ""
-"Оставьте пустым, чтобы использовать схему по умолчанию с соглашения. "
-"Задавайте конкретную схему или «Смешанный» только для тех аккаунтов, которые"
-" отличаются от схемы по умолчанию соглашения."
-
-#. module: partner_commission
-#: model:ir.model.fields.selection,name:partner_commission.selection__commission_account__effective_payer_type__mixed
-#: model:ir.model.fields.selection,name:partner_commission.selection__commission_account__payer_type_override__mixed
-#: model:ir.model.fields.selection,name:partner_commission.selection__commission_agreement__payer_type__mixed
-#: model:ir.model.fields.selection,name:partner_commission.selection__commission_transaction__payer_type__mixed
-msgid "Mixed (auto-detect per transaction from Commission)"
-msgstr "Смешанный (автоопределение по транзакции из Commission)"
-
-#. module: partner_commission
-#: model:ir.model.fields,help:partner_commission.field_commission_agreement__payer_type
-msgid ""
-"Who effectively bears the commission by default for accounts assigned to this agreement:\n"
-"* Commission on top: the client pays the transaction amount plus the commission; the partner receives the full amount.\n"
-"* Commission inside: the client pays only the transaction amount; the commission is deducted from what the partner receives.\n"
-"* Mixed: resolved per transaction from the registry's own 'Commission' field - non-zero means inside (partner pays), zero means on top (client pays). Use this when a single group genuinely mixes both schemes account by account and you don't want to maintain per-account overrides by hand.\n"
-"A specific account can also override this on the accounts directory when only a few accounts differ from the rest."
-msgstr ""
-"Кто по умолчанию фактически несёт комиссию для аккаунтов, назначенных на это соглашение:\n"
-"* Комиссия сверху: клиент платит сумму транзакции плюс комиссию; партнёр получает полную сумму.\n"
-"* Комиссия внутри: клиент платит только сумму транзакции; комиссия удерживается из суммы, которую получает партнёр.\n"
-"* Смешанный: определяется по каждой транзакции из поля 'Commission' самого реестра — ненулевое значение означает внутри (платит партнёр), нулевое — сверху (платит клиент). Используйте, когда в одной группе реально смешаны обе схемы по-разному для разных аккаунтов, и вы не хотите вручную поддерживать переопределения по каждому аккаунту.\n"
-"Конкретный аккаунт также может переопределить это в справочнике аккаунтов, если от общей схемы отличаются лишь немногие аккаунты."
-
-#. module: partner_commission
-#: model:ir.model.fields,help:partner_commission.field_commission_agreement__use_rate_formula
-msgid ""
-"Optional alternative way to compute the partner commission for every transaction on this agreement, instead of the fixed 'Partner commission rate (%)' by payment method:\n"
-"S = Amount * (Cc - Cs) / 100\n"
-"Cc = 'Commission without VAT' (the registry's own raw field) * 100 / Amount - i.e. the gateway's own actual effective net-of-VAT commission rate for that specific transaction, not our configured NKO rate.\n"
-"Cs = the reduction coefficient below, kept by the platform.\n"
-"NKO fee is not affected - only the partner commission."
-msgstr ""
-"Необязательный альтернативный способ расчёта комиссии партнёра для всех транзакций этого соглашения — вместо фиксированной «Ставки комиссии партнёра (%)» по способу оплаты:\n"
-"S = Amount * (Cc − Cs) / 100\n"
-"Cc = «Commission without VAT» (сырое поле из реестра) * 100 / Amount — то есть фактическая эффективная ставка НКО без НДС, которую шлюз применил именно к этой транзакции, а не наша настроенная ставка НКО.\n"
-"Cs = понижающий коэффициент ниже, который оставляет себе площадка.\n"
-"На вознаграждение НКО не влияет — только на комиссию партнёра."
-
-#. module: partner_commission
-#: model:ir.model.fields,field_description:partner_commission.field_commission_agreement__rate_formula_reduction
-msgid "Reduction coefficient Cs (%)"
-msgstr "Понижающий коэффициент Cs (%)"
-
-#. module: partner_commission
-#: model:ir.model.fields,help:partner_commission.field_commission_agreement__rate_formula_reduction
-msgid ""
-"Subtracted from each transaction's own effective NKO rate (Cc) before "
-"multiplying by the amount. Only used when 'Use effective-rate formula' is "
-"enabled."
-msgstr ""
-"Вычитается из фактической ставки НКО транзакции (Cc) перед умножением на "
-"сумму. Используется, только если включена «Использовать формулу по "
-"эффективной ставке»."
-
-#. module: partner_commission
-#: model:ir.model.fields,field_description:partner_commission.field_commission_agreement__use_rate_formula
-msgid "Use effective-rate formula"
-msgstr "Использовать формулу по эффективной ставке"

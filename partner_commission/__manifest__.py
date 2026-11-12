@@ -11,6 +11,7 @@
     "data": [
         "security/commission_security.xml",
         "security/ir.model.access.csv",
+        "views/res_company_views.xml",
         "views/commission_account_views.xml",
         "views/commission_agreement_views.xml",
         "views/commission_transaction_views.xml",

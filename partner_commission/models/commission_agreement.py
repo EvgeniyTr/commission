@@ -52,10 +52,12 @@ class CommissionAgreement(models.Model):
         "directory when only a few accounts differ from the rest.",
     )
     vat_rate = fields.Float(
-        string="VAT rate on NKO fee (%)",
+        string="VAT rate on partner reward (%)",
         default=22.0,
-        help="VAT rate used to split the processing fee (NKO fee) into its "
-        "VAT and VAT-free parts.",
+        help="VAT rate used to split the partner's reward (commission) "
+        "into its VAT and VAT-free parts. Set 0 for a partner on the "
+        "simplified tax system (no VAT). The NKO fee's VAT rate is a "
+        "single company-wide setting instead.",
     )
     use_rate_formula = fields.Boolean(
         string="Use effective-rate formula",

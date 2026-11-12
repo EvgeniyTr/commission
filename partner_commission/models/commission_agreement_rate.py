@@ -52,6 +52,13 @@ class CommissionAgreementRate(models.Model):
         help="Partner commission rate, as a percentage of the transaction "
         "amount.",
     )
+    nko_vat_exempt = fields.Boolean(
+        string="No VAT on NKO fee",
+        help="Do not split any VAT out of the NKO fee for this payment "
+        "method on this agreement: NKO fee VAT is 0 and 'NKO fee without "
+        "VAT' equals the NKO fee. Otherwise the company-wide NKO VAT rate "
+        "applies.",
+    )
     rate_formula_reduction = fields.Float(
         string="Reduction coefficient Cs (%)",
         digits=(16, 5),

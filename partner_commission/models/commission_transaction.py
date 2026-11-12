@@ -26,17 +26,18 @@ def _pct_of(base, rate_percent):
     return Decimal(str(base)) * Decimal(str(rate_percent)) / Decimal("100")
 
 
-def _effective_rate_commission(amount, commission_wo_vat, reduction_percent):
+def _effective_rate_commission(amount, gateway_commission, reduction_percent):
     """Optional alternative partner-commission formula, enabled per
     agreement (commission.agreement.use_rate_formula):
 
-        Cc = ROUND(commission_wo_vat * 100 / Amount, 2)
+        Cc = ROUND(gateway_commission * 100 / Amount, 2)
         S = Amount * (Cc - Cs) / 100
 
-    Cc is the gateway's own actual effective net-of-VAT commission rate
-    for THIS transaction (from the raw registry 'Commission without VAT'
-    field), not our configured NKO rate - rounded to 2 decimals before
-    use, same as the legacy spreadsheet's own helper column for it. Cs
+    Cc is the gateway's own actual effective commission rate for THIS
+    transaction, not our configured NKO rate - rounded to 2 decimals
+    before use, same as the legacy spreadsheet's own helper column for
+    it. gateway_commission is the raw registry 'Commission' (VAT
+    included), for every payment method. Cs
     (reduction_percent) is a platform-kept margin set on the agreement
     (per payment method).
 
@@ -49,7 +50,7 @@ def _effective_rate_commission(amount, commission_wo_vat, reduction_percent):
     first, so the division must actually happen here."""
     if not amount:
         return Decimal("0")
-    cc = (Decimal(str(commission_wo_vat)) * Decimal("100") / Decimal(str(amount))).quantize(
+    cc = (Decimal(str(gateway_commission)) * Decimal("100") / Decimal(str(amount))).quantize(
         Decimal("0.01"), rounding=ROUND_HALF_UP
     )
     return Decimal(str(amount)) * (cc - Decimal(str(reduction_percent))) / Decimal("100")
@@ -178,7 +179,7 @@ class CommissionTransaction(models.Model):
         compute="_compute_amounts",
         store=True,
         help="VAT within the partner commission, using the agreement's "
-        "VAT rate (same rate as the NKO fee VAT) - not the raw registry "
+        "'VAT rate on partner reward' - not the raw registry "
         "'Commission VAT' field.",
     )
     partner_commission_wo_vat = fields.Monetary(
@@ -270,10 +271,12 @@ class CommissionTransaction(models.Model):
         "account_id.rate_override_ids.partner_rate",
         "agreement_id.payer_type",
         "agreement_id.vat_rate",
+        "company_id.partner_commission_nko_vat_rate",
         "agreement_id.use_rate_formula",
         "agreement_id.rate_line_ids.nko_rate",
         "agreement_id.rate_line_ids.partner_rate",
         "agreement_id.rate_line_ids.rate_formula_reduction",
+        "agreement_id.rate_line_ids.nko_vat_exempt",
     )
     def _compute_amounts(self):
         for rec in self:
@@ -282,11 +285,18 @@ class CommissionTransaction(models.Model):
             rec.partner_rate = rate_line.partner_rate if rate_line else 0.0
 
             rec.nko_fee = _round2(_pct_of(rec.amount, rec.nko_rate))
-            vat_rate = rec.agreement_id.vat_rate or 0.0
-            # VAT is calculated the same way for every payment method
-            # (Card, AlfaPay, SberPay, INTCARD, SBP, T-Pay, Payout, Payout
-            # Faster Payment) using the agreement's own VAT rate - no
-            # payment-method-specific exemption.
+            # NKO fee VAT: one company-wide rate for every agreement.
+            # (The partner's own reward VAT uses the agreement's rate,
+            # below.) Same rate for every payment method.
+            company = rec.company_id or rec.env.company
+            vat_rate = company.partner_commission_nko_vat_rate or 0.0
+            # Per agreement and payment method exception: no VAT on the
+            # NKO fee at all (e.g. SBP on some agreements).
+            agreement_line = rec.agreement_id.rate_line_ids.filtered(
+                lambda line: line.pay_method == rec.pay_method
+            )[:1]
+            if agreement_line.nko_vat_exempt:
+                vat_rate = 0.0
             # Kept as plain float (not exact-decimal) on purpose: this is
             # what "NKO fee without VAT" is subtracted from below, at full
             # precision, matching the legacy export's own un-rounded float
@@ -317,10 +327,14 @@ class CommissionTransaction(models.Model):
                     if agreement_rate_line
                     else 0.0
                 )
+                # Cc is the gateway's NKO rate including VAT, for every
+                # payment method (for SBP the registry has no VAT, so
+                # 'Commission' equals 'Commission without VAT' anyway).
+                gateway_commission = rec.gw_commission
                 rec.partner_commission = _round2(
                     _effective_rate_commission(
                         rec.amount,
-                        rec.gw_commission_wo_vat,
+                        gateway_commission,
                         reduction,
                     )
                 )
@@ -329,13 +343,14 @@ class CommissionTransaction(models.Model):
                     _pct_of(rec.amount, rec.partner_rate)
                 )
 
-            # Same VAT rate as the NKO fee above (including the SBP
-            # zeroing), applied to the partner commission instead.
+            # Partner reward VAT: the agreement's own rate (0 for a
+            # partner on the simplified tax system).
+            partner_vat_rate = rec.agreement_id.vat_rate or 0.0
             partner_vat_exact = (
                 Decimal(str(rec.partner_commission))
-                * Decimal(str(vat_rate))
-                / (Decimal("100") + Decimal(str(vat_rate)))
-                if vat_rate
+                * Decimal(str(partner_vat_rate))
+                / (Decimal("100") + Decimal(str(partner_vat_rate)))
+                if partner_vat_rate
                 else Decimal("0")
             )
             rec.partner_commission_vat = _round2(partner_vat_exact)
